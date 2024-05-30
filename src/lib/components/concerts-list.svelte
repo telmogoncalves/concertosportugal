@@ -115,6 +115,7 @@
                       </div>
 
                       <a
+                        data-sveltekit-preload-data="hover"
                         href="/concerts/{concert.slug}"
                         class="flex items-center space-x-3 p-1.5 rounded-lg hover:bg-secondary w-full"
                       >

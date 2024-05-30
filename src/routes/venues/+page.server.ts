@@ -4,10 +4,12 @@ import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async () => {
   return {
-    venues: await db.venue.findMany({
-      orderBy: {
-        name: 'asc',
-      },
-    }),
+    streamed: {
+      venues: db.venue.findMany({
+        orderBy: {
+          name: 'asc',
+        },
+      }),
+    },
   }
 }

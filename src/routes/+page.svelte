@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { format } from 'date-fns'
-  import { pt } from 'date-fns/locale'
+import { format } from 'date-fns'
+import { pt } from 'date-fns/locale'
 
-  import List from '$lib/components/homepage/concerts/list.svelte'
-  import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
-  import Title from '$lib/components/title.svelte'
-  import { Button } from '$lib/components/ui/button'
+import List from '$lib/components/homepage/concerts/list.svelte'
+import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
+import Title from '$lib/components/title.svelte'
+import { Button } from '$lib/components/ui/button'
 
-  export let data: import('./$types').PageData
+export let data: import('./$types').PageData
 </script>
 
-<div class="space-y-12">
-  <div class="w-2/3 mx-auto py-24">
-    <div class="text-center space-y-2">
+<div class="space-y-12 py-24">
+  <div class="mx-auto w-2/3">
+    <div class="space-y-2 text-center">
       <Title size="4xl" weight="bold" family="grotesque">Concertos em Portugal</Title>
-      <div class="text-gray-500 text-xl">Descobre os próximos concertos.</div>
+      <div class="text-xl text-gray-500">Descobre os próximos concertos.</div>
 
       <Button href="/concerts" data-sveltekit-preload-data="hover">Ver todos os concertos</Button>
     </div>
@@ -25,7 +25,6 @@
       <Skeleton />
     {:then concerts}
       {@const grouped =
-        // @ts-expect-error - TS doesn't know about the Date constructor
         concerts.reduce((acc, concert) => {
           const date = new Date(concert.date)
           const month = format(date, 'MMMM', { locale: pt })
@@ -44,8 +43,9 @@
 
       <div class="space-y-24">
         {#each grouped as { month, concerts }}
+          {@const speeds = [50, 60, 70, 80, 90, 100]}
           {#if concerts.length}
-            <List title={month} {concerts} />
+            <List title={month} concerts={concerts} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
           {/if}
         {/each}
       </div>

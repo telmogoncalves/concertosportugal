@@ -1,77 +1,77 @@
 <script lang="ts">
-import type { Artist, Concert as PrismaConcert, Venue } from '@prisma/client'
-import { format } from 'date-fns'
-import { pt } from 'date-fns/locale'
+  import type { Artist, Concert as PrismaConcert, Venue } from '@prisma/client'
+  import { format } from 'date-fns'
+  import { pt } from 'date-fns/locale'
 
-import * as Tooltip from '$lib/components/ui/tooltip'
+  import * as Tooltip from '$lib/components/ui/tooltip'
 
-import CalendarIcon from './calendar-icon.svelte'
-import Title from './title.svelte'
+  import CalendarIcon from './calendar-icon.svelte'
+  import Title from './title.svelte'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export let data: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  export let data: any
 
-type Concert = PrismaConcert & {
-  artists?: Artist[]
-  venue?: Venue
-}
-
-type Day = {
-  value: string
-  concerts: Concert[]
-}
-
-type Month = {
-  value: string
-  days: Day[]
-}
-
-type Year = {
-  year: string
-  months: Month[]
-}
-
-function addConcertToDay(days: Day[], day: string, concert: Concert) {
-  const dayIndex = days.findIndex(d => d.value === day)
-
-  if (dayIndex === -1) {
-    days.push({ value: day, concerts: [concert] })
-  } else {
-    days[dayIndex].concerts.push(concert)
+  type Concert = PrismaConcert & {
+    artists?: Artist[]
+    venue?: Venue
   }
-}
 
-function addConcertToMonth(months: Month[], month: string, day: string, concert: Concert) {
-  const monthIndex = months.findIndex(m => m.value === month)
-
-  if (monthIndex === -1) {
-    months.push({ value: month, days: [{ value: day, concerts: [concert] }] })
-  } else {
-    addConcertToDay(months[monthIndex].days, day, concert)
+  type Day = {
+    value: string
+    concerts: Concert[]
   }
-}
 
-function addConcertToYear(acc: Year[], year: string, month: string, day: string, concert: Concert) {
-  const yearIndex = acc.findIndex(y => y.year === year)
-
-  if (yearIndex === -1) {
-    acc.push({ year, months: [{ value: month, days: [{ value: day, concerts: [concert] }] }] })
-  } else {
-    addConcertToMonth(acc[yearIndex].months, month, day, concert)
+  type Month = {
+    value: string
+    days: Day[]
   }
-}
 
-// Group concerts by year and month
-$: concerts = data?.reduce((acc: Year[], concert: Concert) => {
-  const date = new Date(concert.date)
-  const year = date.getFullYear().toString()
-  const month = date.toLocaleString('default', { month: 'numeric' })
-  const day = date.getDate().toString()
+  type Year = {
+    year: string
+    months: Month[]
+  }
 
-  addConcertToYear(acc, year, month, day, concert)
+  function addConcertToDay(days: Day[], day: string, concert: Concert) {
+    const dayIndex = days.findIndex(d => d.value === day)
 
-  return acc
-}, []) as { year: string; months: { value: string; days: { value: string; concerts: Concert[] }[] }[] }[]
+    if (dayIndex === -1) {
+      days.push({ value: day, concerts: [concert] })
+    } else {
+      days[dayIndex].concerts.push(concert)
+    }
+  }
+
+  function addConcertToMonth(months: Month[], month: string, day: string, concert: Concert) {
+    const monthIndex = months.findIndex(m => m.value === month)
+
+    if (monthIndex === -1) {
+      months.push({ value: month, days: [{ value: day, concerts: [concert] }] })
+    } else {
+      addConcertToDay(months[monthIndex].days, day, concert)
+    }
+  }
+
+  function addConcertToYear(acc: Year[], year: string, month: string, day: string, concert: Concert) {
+    const yearIndex = acc.findIndex(y => y.year === year)
+
+    if (yearIndex === -1) {
+      acc.push({ year, months: [{ value: month, days: [{ value: day, concerts: [concert] }] }] })
+    } else {
+      addConcertToMonth(acc[yearIndex].months, month, day, concert)
+    }
+  }
+
+  // Group concerts by year and month
+  $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
+    const date = new Date(concert.date)
+    const year = date.getFullYear().toString()
+    const month = date.toLocaleString('default', { month: 'numeric' })
+    const day = date.getDate().toString()
+
+    addConcertToYear(acc, year, month, day, concert)
+
+    return acc
+  }, []) as { year: string; months: { value: string; days: { value: string; concerts: Concert[] }[] }[] }[]
 </script>
 
 {#if concerts.length}

@@ -48,7 +48,7 @@
         <Label for="zip">ZIP</Label>
         <Input type="text" id="zip" name="zip" />
       </div>
-      
+
       <div class="space-y-2">
         <Label for="city">City</Label>
         <Input type="text" id="city" name="city" />

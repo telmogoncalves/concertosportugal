@@ -1,13 +1,13 @@
 <script lang="ts">
-import { format } from 'date-fns'
-import { pt } from 'date-fns/locale'
+  import { format } from 'date-fns'
+  import { pt } from 'date-fns/locale'
 
-import List from '$lib/components/homepage/concerts/list.svelte'
-import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
-import Title from '$lib/components/title.svelte'
-import { Button } from '$lib/components/ui/button'
+  import List from '$lib/components/homepage/concerts/list.svelte'
+  import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
+  import Title from '$lib/components/title.svelte'
+  import { Button } from '$lib/components/ui/button'
 
-export let data: import('./$types').PageData
+  export let data: import('./$types').PageData
 </script>
 
 <div class="space-y-12 py-24">
@@ -28,28 +28,27 @@ export let data: import('./$types').PageData
     {#await data.streamed.concerts}
       <Skeleton />
     {:then concerts}
-      {@const grouped =
-        concerts.reduce((acc, concert) => {
-          const date = new Date(concert.date)
-          const month = format(date, 'MMMM', { locale: pt })
+      {@const grouped = concerts.reduce((acc, concert) => {
+        const date = new Date(concert.date)
+        const month = format(date, 'MMMM', { locale: pt })
 
-          // @ts-expect-error - TS doesn't know about the Date constructor
-          const monthIndex = acc.findIndex(m => m.month === month)
+        // @ts-expect-error - TS doesn't know about the Date constructor
+        const monthIndex = acc.findIndex(m => m.month === month)
 
-          if (monthIndex === -1) {
-            acc.push({ month, concerts: [concert] })
-          } else {
-            acc[monthIndex].concerts.push(concert)
-          }
+        if (monthIndex === -1) {
+          acc.push({ month, concerts: [concert] })
+        } else {
+          acc[monthIndex].concerts.push(concert)
+        }
 
-          return acc
-        }, [])}
+        return acc
+      }, [])}
 
       <div class="space-y-24">
         {#each grouped as { month, concerts }}
           {@const speeds = [30, 40, 50]}
           {#if concerts.length}
-            <List title={month} concerts={concerts} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
+            <List title={month} {concerts} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
           {/if}
         {/each}
       </div>

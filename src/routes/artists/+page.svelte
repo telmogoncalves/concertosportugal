@@ -1,13 +1,13 @@
 <script lang="ts">
-import { page } from '$app/stores'
-import ConcertsList from '$lib/components/concerts-list.svelte'
-import Title from '$lib/components/title.svelte'
-import Button from '$lib/components/ui/button/button.svelte'
-import { Skeleton } from '$lib/components/ui/skeleton'
+  import { page } from '$app/stores'
+  import ConcertsList from '$lib/components/concerts-list.svelte'
+  import Title from '$lib/components/title.svelte'
+  import Button from '$lib/components/ui/button/button.svelte'
+  import { Skeleton } from '$lib/components/ui/skeleton'
 
-export let data: import('./$types').PageData
+  export let data: import('./$types').PageData
 
-$: selected = $page.url.searchParams.get('see')
+  $: selected = $page.url.searchParams.get('see')
 </script>
 
 <div class="space-y-6 p-6 md:p-12">

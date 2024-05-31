@@ -1,8 +1,8 @@
 <script lang="ts">
-import Title from '$lib/components/title.svelte'
-import CalendarIcon from '$lib/components/calendar-icon.svelte'
+  import CalendarIcon from '$lib/components/calendar-icon.svelte'
+  import Title from '$lib/components/title.svelte'
 
-export let data: import('./$types').PageData
+  export let data: import('./$types').PageData
 </script>
 
 <svelte:head>

@@ -2,8 +2,9 @@ import { json } from '@sveltejs/kit'
 
 import { AUTH_PIN } from '$env/static/private'
 
-/** @type {import('./$types').RequestHandler} */
-export async function POST({ cookies, request }) {
+import type { RequestHandler } from './$types'
+
+export const POST: RequestHandler = async ({ cookies, request }) => {
   const data = await request.json()
   const pin = data.pin
 

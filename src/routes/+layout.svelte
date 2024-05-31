@@ -1,14 +1,14 @@
 <script>
-import '../app.css'
+  import '../app.css'
 
-import Logo from '$lib/components/logo.svelte'
+  import Logo from '$lib/components/logo.svelte'
 
-let menus = [
-  { name: 'Home', href: '/' },
-  { name: 'Concertos', href: '/concerts' },
-  { name: 'Artistas', href: '/artists' },
-  { name: 'Locais', href: '/venues' },
-]
+  let menus = [
+    { name: 'Home', href: '/' },
+    { name: 'Concertos', href: '/concerts' },
+    { name: 'Artistas', href: '/artists' },
+    { name: 'Locais', href: '/venues' },
+  ]
 </script>
 
 <div class="sticky top-0 z-50 flex items-center justify-between border-b bg-background px-6 py-4 md:px-12">
@@ -21,7 +21,7 @@ let menus = [
   <nav class="hidden text-sm font-medium md:block">
     <div class="flex space-x-6">
       {#each menus as { name, href }}
-        <a href={href} class="hover:underline" data-sveltekit-preload-data="hover">{name}</a>
+        <a {href} class="hover:underline" data-sveltekit-preload-data="hover">{name}</a>
       {/each}
     </div>
   </nav>

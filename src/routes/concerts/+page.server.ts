@@ -1,5 +1,6 @@
-import db from '$lib/db'
 import { startOfMonth } from 'date-fns'
+
+import db from '$lib/db'
 
 import type { PageServerLoad } from './$types'
 

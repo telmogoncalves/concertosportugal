@@ -1,8 +1,8 @@
 <script lang="ts">
-import ConcertsList from '$lib/components/concerts-list.svelte'
-import Title from '$lib/components/title.svelte'
+  import ConcertsList from '$lib/components/concerts-list.svelte'
+  import Title from '$lib/components/title.svelte'
 
-export let data: import('./$types').PageData
+  export let data: import('./$types').PageData
 </script>
 
 <svelte:head>

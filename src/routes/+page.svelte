@@ -42,11 +42,13 @@
           return acc
         }, [])}
 
-      {#each grouped as { month, concerts }}
-        {#if concerts.length}
-          <List title={month} {concerts} />
-        {/if}
-      {/each}
+      <div class="space-y-24">
+        {#each grouped as { month, concerts }}
+          {#if concerts.length}
+            <List title={month} {concerts} />
+          {/if}
+        {/each}
+      </div>
     {:catch error}
       <div>Error: {error.message}</div>
     {/await}

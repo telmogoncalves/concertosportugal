@@ -1,0 +1,16 @@
+<script lang="ts">
+  import { format } from 'date-fns'
+  import { pt } from 'date-fns/locale'
+
+  export let date: Date | string
+</script>
+
+<div class="ring-4 ring-primary w-12 rounded-md">
+  <div class="h-5 bg-primary text-background text-xs text-center font-medium capitalize">
+    {format(new Date(date), 'E', { locale: pt })}
+  </div>
+
+  <div class="text-lg font-semibold flex items-center justify-center py-0.5">
+    {format(new Date(date), 'd')}
+  </div>
+</div>

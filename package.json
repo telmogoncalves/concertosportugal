@@ -52,6 +52,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "openai": "^4.47.2",
+    "svelte-fast-marquee": "^0.7.0",
     "svelte-pincode": "^2.2.1",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1"

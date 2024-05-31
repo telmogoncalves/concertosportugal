@@ -28,3 +28,12 @@
 </div>
 
 <slot />
+
+<footer class="border-t py-8 my-8">
+  <div class="flex flex-col items-center space-y-6">
+    <Logo />
+    <div class="text-xs text-gray-500">
+      © {new Date().getFullYear()} Concertos Portugal
+    </div>
+  </div>
+</footer>

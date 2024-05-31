@@ -12,11 +12,15 @@ export let data: import('./$types').PageData
 
 <div class="space-y-12 py-24">
   <div class="mx-auto w-2/3">
-    <div class="space-y-2 text-center">
-      <Title size="4xl" weight="bold" family="grotesque">Concertos em Portugal</Title>
-      <div class="text-xl text-gray-500">Descobre os próximos concertos.</div>
+    <div class="space-y-6 text-center">
+      <div class="space-y-2">
+        <Title size="4xl" weight="bold" family="grotesque">Concertos em Portugal</Title>
+        <div class="text-xl text-gray-500">Descobre os próximos concertos.</div>
+      </div>
 
-      <Button href="/concerts" data-sveltekit-preload-data="hover">Ver todos os concertos</Button>
+      <Button href="/concerts" variant="outline" size="lg" data-sveltekit-preload-data="hover"
+        >Ver todos os concertos</Button
+      >
     </div>
   </div>
 

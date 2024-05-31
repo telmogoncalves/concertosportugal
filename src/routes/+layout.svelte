@@ -13,8 +13,8 @@
 
 <div class="px-12 py-4 border-b flex items-center justify-between sticky top-0 bg-background z-50">
   <div class="flex items-center space-x-2">
-    <a data-sveltekit-preload-data="hover" href="/" class="flex items-center space-x-3">
-      <Logo class="h-14" />
+    <a data-sveltekit-preload-data="hover" href="/" class="flex text-sm items-center space-x-3">
+      <Logo />
     </a>
   </div>
 

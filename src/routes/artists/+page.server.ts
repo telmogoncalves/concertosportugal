@@ -8,6 +8,16 @@ export const load: PageServerLoad = async () => {
         orderBy: {
           name: 'asc',
         },
+        include: {
+          concerts: {
+            include: {
+              venue: true,
+            },
+            orderBy: {
+              date: 'asc',
+            },
+          },
+        },
       }),
     },
   }

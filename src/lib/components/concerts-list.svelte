@@ -159,5 +159,5 @@
     </div>
   {/each}
 {:else}
-  <div>Sem concertos</div>
+  <div class="text-sm text-gray-500 italic">Que seja do nosso conhecimento, não há concertos agendados.</div>
 {/if}

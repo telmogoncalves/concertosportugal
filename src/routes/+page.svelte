@@ -43,7 +43,7 @@ export let data: import('./$types').PageData
 
       <div class="space-y-24">
         {#each grouped as { month, concerts }}
-          {@const speeds = [50, 60, 70, 80, 90, 100]}
+          {@const speeds = [30, 40, 50]}
           {#if concerts.length}
             <List title={month} concerts={concerts} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
           {/if}

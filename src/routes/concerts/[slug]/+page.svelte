@@ -25,7 +25,7 @@ export let data: import('./$types').PageData
         <div class="grid-cols-2 gap-4 md:grid">
           {#each data.concert.artists as artist}
             <a
-              href="/artists?selected={artist.id}"
+              href="/artists?see={artist.slug}"
               data-sveltekit-preload-data="hover"
               class="flex items-center space-x-3 rounded-lg p-2 hover:bg-secondary"
             >

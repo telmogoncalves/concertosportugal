@@ -29,8 +29,6 @@ export const actions = {
     const slug = data.get('slug') as string
     const date = data.get('date') as string
 
-    console.log({ venueId })
-
     if (!name || !slug || !date || !venueId || artists.length === 0) {
       return {
         status: 400,

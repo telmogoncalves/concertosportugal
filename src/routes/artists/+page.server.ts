@@ -12,6 +12,7 @@ export const load: PageServerLoad = async () => {
           concerts: {
             include: {
               venue: true,
+              artists: true,
             },
             orderBy: {
               date: 'asc',

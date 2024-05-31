@@ -1,77 +1,77 @@
 <script lang="ts">
-  import type { Artist, Concert as PrismaConcert, Venue } from '@prisma/client'
-  import { format } from 'date-fns'
-  import { pt } from 'date-fns/locale'
+import type { Artist, Concert as PrismaConcert, Venue } from '@prisma/client'
+import { format } from 'date-fns'
+import { pt } from 'date-fns/locale'
 
-  import * as Tooltip from '$lib/components/ui/tooltip'
+import * as Tooltip from '$lib/components/ui/tooltip'
 
-  import CalendarIcon from './calendar-icon.svelte'
-  import Title from './title.svelte'
+import CalendarIcon from './calendar-icon.svelte'
+import Title from './title.svelte'
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export let data: any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export let data: any
 
-  type Concert = PrismaConcert & {
-    artists?: Artist[]
-    venue?: Venue
+type Concert = PrismaConcert & {
+  artists?: Artist[]
+  venue?: Venue
+}
+
+type Day = {
+  value: string
+  concerts: Concert[]
+}
+
+type Month = {
+  value: string
+  days: Day[]
+}
+
+type Year = {
+  year: string
+  months: Month[]
+}
+
+function addConcertToDay(days: Day[], day: string, concert: Concert) {
+  const dayIndex = days.findIndex(d => d.value === day)
+
+  if (dayIndex === -1) {
+    days.push({ value: day, concerts: [concert] })
+  } else {
+    days[dayIndex].concerts.push(concert)
   }
+}
 
-  type Day = {
-    value: string
-    concerts: Concert[]
+function addConcertToMonth(months: Month[], month: string, day: string, concert: Concert) {
+  const monthIndex = months.findIndex(m => m.value === month)
+
+  if (monthIndex === -1) {
+    months.push({ value: month, days: [{ value: day, concerts: [concert] }] })
+  } else {
+    addConcertToDay(months[monthIndex].days, day, concert)
   }
+}
 
-  type Month = {
-    value: string
-    days: Day[]
+function addConcertToYear(acc: Year[], year: string, month: string, day: string, concert: Concert) {
+  const yearIndex = acc.findIndex(y => y.year === year)
+
+  if (yearIndex === -1) {
+    acc.push({ year, months: [{ value: month, days: [{ value: day, concerts: [concert] }] }] })
+  } else {
+    addConcertToMonth(acc[yearIndex].months, month, day, concert)
   }
+}
 
-  type Year = {
-    year: string
-    months: Month[]
-  }
+// Group concerts by year and month
+$: concerts = data?.reduce((acc: Year[], concert: Concert) => {
+  const date = new Date(concert.date)
+  const year = date.getFullYear().toString()
+  const month = date.toLocaleString('default', { month: 'numeric' })
+  const day = date.getDate().toString()
 
-  function addConcertToDay(days: Day[], day: string, concert: Concert) {
-    const dayIndex = days.findIndex(d => d.value === day)
+  addConcertToYear(acc, year, month, day, concert)
 
-    if (dayIndex === -1) {
-      days.push({ value: day, concerts: [concert] })
-    } else {
-      days[dayIndex].concerts.push(concert)
-    }
-  }
-
-  function addConcertToMonth(months: Month[], month: string, day: string, concert: Concert) {
-    const monthIndex = months.findIndex(m => m.value === month)
-
-    if (monthIndex === -1) {
-      months.push({ value: month, days: [{ value: day, concerts: [concert] }] })
-    } else {
-      addConcertToDay(months[monthIndex].days, day, concert)
-    }
-  }
-
-  function addConcertToYear(acc: Year[], year: string, month: string, day: string, concert: Concert) {
-    const yearIndex = acc.findIndex(y => y.year === year)
-
-    if (yearIndex === -1) {
-      acc.push({ year, months: [{ value: month, days: [{ value: day, concerts: [concert] }] }] })
-    } else {
-      addConcertToMonth(acc[yearIndex].months, month, day, concert)
-    }
-  }
-
-  // Group concerts by year and month
-  $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
-    const date = new Date(concert.date)
-    const year = date.getFullYear().toString()
-    const month = date.toLocaleString('default', { month: 'numeric' })
-    const day = date.getDate().toString()
-
-    addConcertToYear(acc, year, month, day, concert)
-
-    return acc
-  }, []) as { year: string; months: { value: string; days: { value: string; concerts: Concert[] }[] }[] }[]
+  return acc
+}, []) as { year: string; months: { value: string; days: { value: string; concerts: Concert[] }[] }[] }[]
 </script>
 
 {#if concerts.length}
@@ -81,7 +81,7 @@
 
       <div class="space-y-6">
         {#each concert.months as month}
-          <div class="space-y-3 border p-6 rounded-xl shadow-sm">
+          <div class="space-y-3 rounded-xl border p-6 shadow-sm">
             <Title size="xl" weight="semibold">
               <span class="capitalize">
                 {format(new Date(2024, Number(month.value) - 1, 1), 'MMMM', { locale: pt })}
@@ -97,10 +97,10 @@
 
                   <div class:opacity-30={past} class="hover:opacity-100">
                     <div class="flex items-center space-x-3">
-                      <div class="py-1.5 w-14 flex justify-center">
+                      <div class="flex w-14 justify-center py-1.5">
                         {#if printGuide}
-                          <div class="w-full h-16 flex justify-center -mt-5">
-                            <div class="w-px bg-primary h-full" />
+                          <div class="-mt-5 flex h-16 w-full justify-center">
+                            <div class="h-full w-px bg-primary" />
                           </div>
                         {:else}
                           <CalendarIcon date={concert.date} />
@@ -110,7 +110,7 @@
                       <a
                         data-sveltekit-preload-data="hover"
                         href="/concerts/{concert.slug}"
-                        class="flex items-center space-x-3 p-1.5 rounded-lg hover:bg-secondary w-full"
+                        class="flex w-full items-center space-x-3 rounded-lg p-1.5 hover:bg-secondary"
                       >
                         {#if concert.artists}
                           <div class="flex -space-x-2 overflow-hidden">
@@ -120,7 +120,7 @@
                                   <img
                                     src={artist.image}
                                     alt={artist.name}
-                                    class="w-8 h-8 object-cover rounded-full ring-4 ring-background"
+                                    class="h-8 w-8 rounded-full object-cover ring-4 ring-background"
                                   />
                                 </Tooltip.Trigger>
 
@@ -132,8 +132,8 @@
                           </div>
                         {/if}
 
-                        <div>
-                          <div class="font-semibold">{concert.name}</div>
+                        <div class="truncate">
+                          <div class="truncate text-ellipsis font-semibold">{concert.name}</div>
                           {#if concert.venue}
                             <div class="text-sm text-gray-500">
                               📍 {concert.venue.name}
@@ -152,5 +152,5 @@
     </div>
   {/each}
 {:else}
-  <div class="text-sm text-gray-500 italic">Que seja do nosso conhecimento, não há concertos agendados.</div>
+  <div class="text-sm italic text-gray-500">Que seja do nosso conhecimento, não há concertos agendados.</div>
 {/if}

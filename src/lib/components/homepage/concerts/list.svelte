@@ -27,10 +27,12 @@
           <img src={cover} alt={concert.artists[0].name} class="w-full h-48 object-cover" />
 
           <div class="p-4 flex items-center space-x-4">
-            <CalendarIcon date={concert.date} />
-
             <div>
-              <div class="font-semibold">{concert.name}</div>
+              <CalendarIcon date={concert.date} />
+            </div>
+
+            <div class="truncate">
+              <div class="font-semibold truncate text-ellipsis">{concert.name}</div>
               <div class="text-sm text-gray-500">📍 {concert.venue.name}</div>
             </div>
           </div>

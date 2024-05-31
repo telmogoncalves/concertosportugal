@@ -7,7 +7,7 @@ import { Skeleton } from '$lib/components/ui/skeleton'
 
 export let data: import('./$types').PageData
 
-$: selected = $page.url.searchParams.get('selected')
+$: selected = $page.url.searchParams.get('see')
 </script>
 
 <div class="space-y-6 p-12">
@@ -36,7 +36,7 @@ $: selected = $page.url.searchParams.get('selected')
           {#each artists as artist}
             <a
               class="flex h-20 items-center overflow-hidden rounded-xl border hover:border-primary"
-              href="/artists?selected={artist.id}"
+              href="/artists?see={artist.slug}"
               class:border-primary={selected === artist.id}
               data-sveltekit-noscroll
             >
@@ -50,7 +50,7 @@ $: selected = $page.url.searchParams.get('selected')
         </div>
 
         {#if selected}
-          {@const details = artists.find(artist => artist.id === selected)}
+          {@const details = artists.find(artist => artist.slug === selected)}
           {@const concerts = details?.concerts}
 
           <div class="sticky top-24 w-2/3 space-y-4 rounded-xl border p-6 shadow-sm">

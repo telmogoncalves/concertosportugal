@@ -23,9 +23,9 @@ export let speed = 80
         <a
           data-sveltekit-preload-data="hover"
           href="/concerts/{concert.slug}"
-          class="block w-[350px] overflow-hidden rounded-xl border shadow-sm hover:border-primary"
+          class="block w-[250px] overflow-hidden rounded-xl border shadow-sm hover:border-primary md:w-[350px]"
         >
-          <img src={cover} alt={concert.artists[0].name} class="h-48 w-full object-cover" />
+          <img src={cover} alt={concert.artists[0].name} class="h-24 w-full object-cover md:h-48" />
 
           <div class="flex items-center space-x-4 p-4">
             <div>

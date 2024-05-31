@@ -10,17 +10,19 @@ export let data: import('./$types').PageData
 </svelte:head>
 
 {#if data.concert}
-  <div class="space-y-12 p-12">
-    <div class="flex items-center space-x-6">
+  <div class="space-y-12 p-6 md:p-12">
+    <div
+      class="flex flex-col items-center space-x-0 space-y-6 text-center md:flex-row md:space-x-6 md:space-y-0 md:text-left"
+    >
       <CalendarIcon date={data.concert.date} />
       <Title size="3xl" weight="bold" family="grotesque">{data.concert.name}</Title>
     </div>
 
-    <div class="grid grid-cols-2 gap-8">
-      <div class="space-y-4 rounded-xl border p-8">
+    <div class="grid-cols-2 gap-8 space-y-6 md:grid md:space-y-0">
+      <div class="space-y-4 rounded-xl border p-3 md:p-8">
         <Title size="lg" weight="semibold" family="grotesque">🎸 Bandas</Title>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid-cols-2 gap-4 md:grid">
           {#each data.concert.artists as artist}
             <a
               href="/artists?selected={artist.id}"
@@ -34,7 +36,7 @@ export let data: import('./$types').PageData
         </div>
       </div>
 
-      <div class="space-y-4 rounded-xl border p-8">
+      <div class="space-y-4 rounded-xl border p-3 md:p-8">
         <Title size="lg" weight="semibold" family="grotesque">📍 Localização</Title>
 
         <img src={data.concert.venue.image} alt={data.concert.venue.name} class="h-72 w-full rounded-lg object-cover" />

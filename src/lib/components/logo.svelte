@@ -60,11 +60,9 @@
     />
   </svg>
 
-  <div class="font-grotesque font-semibold uppercase leading-4">
+  <div class="space-y-0.5 font-grotesque font-semibold uppercase leading-4">
     <div>Concertos</div>
     <div class="flex items-center space-x-2">
-      <div>Portugal</div>
-
       <div class="flex space-x-0.5 pt-px">
         <div class="h-2 w-2 rounded-full bg-green-500" />
         <div class="h-2 w-2 rounded-full bg-yellow-500" />

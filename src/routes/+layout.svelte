@@ -11,14 +11,14 @@ let menus = [
 ]
 </script>
 
-<div class="sticky top-0 z-50 flex items-center justify-between border-b bg-background px-12 py-4">
+<div class="sticky top-0 z-50 flex items-center justify-between border-b bg-background px-6 py-4 md:px-12">
   <div class="flex items-center space-x-2">
     <a data-sveltekit-preload-data="hover" href="/" class="flex items-center space-x-3 text-sm">
-      <Logo />
+      <Logo class="h-10 md:h-12" />
     </a>
   </div>
 
-  <nav class="text-sm font-medium">
+  <nav class="hidden text-sm font-medium md:block">
     <div class="flex space-x-6">
       {#each menus as { name, href }}
         <a href={href} class="hover:underline" data-sveltekit-preload-data="hover">{name}</a>

@@ -10,7 +10,7 @@ export let data: import('./$types').PageData
 $: selected = $page.url.searchParams.get('see')
 </script>
 
-<div class="space-y-6 p-12">
+<div class="space-y-6 p-6 md:p-12">
   <Title size="3xl" weight="bold" family="grotesque">Artistas</Title>
 
   {#await data.streamed.artists}
@@ -32,7 +32,11 @@ $: selected = $page.url.searchParams.get('see')
       <!-- <Input placeholder="Procurar artistas" bind:value={q} /> -->
 
       <div class="flex w-full items-start space-x-6">
-        <div class="grid w-full gap-4" class:grid-cols-4={!selected} class:grid-cols-2={selected}>
+        <div
+          class="w-full gap-4 space-y-3 md:grid md:space-y-0"
+          class:grid-cols-4={!selected}
+          class:grid-cols-2={selected}
+        >
           {#each artists as artist}
             <a
               class="flex h-20 items-center overflow-hidden rounded-xl border hover:border-primary"
@@ -53,10 +57,12 @@ $: selected = $page.url.searchParams.get('see')
           {@const details = artists.find(artist => artist.slug === selected)}
           {@const concerts = details?.concerts}
 
-          <div class="sticky top-24 w-2/3 space-y-4 rounded-xl border p-6 shadow-sm">
+          <div
+            class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-white p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
+          >
             <div class="flex items-center justify-between">
               <Title size="xl" family="grotesque">{details?.name}</Title>
-              <Button href="/artists" variant="outline" size="sm">Fechar</Button>
+              <Button href="/artists" variant="outline" size="sm" data-sveltekit-noscroll>Fechar</Button>
             </div>
 
             <img src={details?.image} alt={details?.name} class="h-72 w-full rounded-xl object-cover object-top" />

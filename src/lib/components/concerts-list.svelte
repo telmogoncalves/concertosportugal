@@ -96,8 +96,8 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
                   {@const printGuide = previousDay && previousDay.date !== concert.date}
 
                   <div class:opacity-30={past} class="hover:opacity-100">
-                    <div class="flex items-center space-x-3">
-                      <div class="flex w-14 justify-center py-1.5">
+                    <div class="flex items-center space-x-0.5 md:space-x-3">
+                      <div class="flex w-16 justify-center py-1.5">
                         {#if printGuide}
                           <div class="-mt-5 flex h-16 w-full justify-center">
                             <div class="h-full w-px bg-primary" />
@@ -110,32 +110,36 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
                       <a
                         data-sveltekit-preload-data="hover"
                         href="/concerts/{concert.slug}"
-                        class="flex w-full items-center space-x-3 rounded-lg p-1.5 hover:bg-secondary"
+                        class="flex w-full items-center space-x-3 overflow-auto rounded-lg p-1.5 hover:bg-secondary"
                       >
-                        {#if concert.artists}
-                          <div class="flex -space-x-2 overflow-hidden">
-                            {#each concert.artists as artist}
-                              <Tooltip.Root openDelay={0.3}>
-                                <Tooltip.Trigger>
-                                  <img
-                                    src={artist.image}
-                                    alt={artist.name}
-                                    class="h-8 w-8 rounded-full object-cover ring-4 ring-background"
-                                  />
-                                </Tooltip.Trigger>
+                        <div class="hidden md:block">
+                          {#if concert.artists}
+                            <div class="flex -space-x-2 overflow-hidden">
+                              {#each concert.artists as artist}
+                                <Tooltip.Root openDelay={0.3}>
+                                  <Tooltip.Trigger>
+                                    <div class="w-8">
+                                      <img
+                                        src={artist.image}
+                                        alt={artist.name}
+                                        class="h-8 w-8 rounded-full object-cover ring-4 ring-background"
+                                      />
+                                    </div>
+                                  </Tooltip.Trigger>
 
-                                <Tooltip.Content>
-                                  <p>{artist.name}</p>
-                                </Tooltip.Content>
-                              </Tooltip.Root>
-                            {/each}
-                          </div>
-                        {/if}
+                                  <Tooltip.Content>
+                                    <p>{artist.name}</p>
+                                  </Tooltip.Content>
+                                </Tooltip.Root>
+                              {/each}
+                            </div>
+                          {/if}
+                        </div>
 
-                        <div class="truncate">
+                        <div class="w-full truncate">
                           <div class="truncate text-ellipsis font-semibold">{concert.name}</div>
                           {#if concert.venue}
-                            <div class="text-sm text-gray-500">
+                            <div class="-ml-1 text-sm text-gray-500">
                               📍 {concert.venue.name}
                             </div>
                           {/if}
@@ -152,5 +156,7 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
     </div>
   {/each}
 {:else}
-  <div class="text-sm italic text-gray-500">Que seja do nosso conhecimento, não há concertos agendados.</div>
+  <div class="text-sm italic text-gray-500">
+    Ou não há concertos agendados ou estamos ainda a carregar a informação.
+  </div>
 {/if}

@@ -2,6 +2,7 @@
   import '../app.css'
 
   import Logo from '$lib/components/logo.svelte'
+  import { Button } from '$lib/components/ui/button'
 
   let menus = [
     { name: 'Home', href: '/' },
@@ -19,10 +20,12 @@
   </div>
 
   <nav class="hidden font-medium md:block">
-    <div class="flex space-x-6">
+    <div class="flex items-center space-x-6">
       {#each menus as { name, href }}
         <a {href} class="text-lg font-unica hover:underline" data-sveltekit-preload-data="hover">{name}</a>
       {/each}
+
+      <Button class="font-unica text-base font-medium">Adiciona o TeU</Button>
     </div>
   </nav>
 </div>

@@ -7,7 +7,7 @@
 </script>
 
 <div class="ring-4 ring-primary w-12 rounded-md">
-  <div class="h-5 bg-primary text-background text-xs text-center font-medium capitalize">
+  <div class="h-[22px] bg-primary text-background uppercase text-sm font-unica text-center font-mediu">
     {format(new Date(date), top === 'day' ? 'E' : 'MMM', { locale: pt })}
   </div>
 

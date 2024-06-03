@@ -58,7 +58,7 @@
           {@const concerts = details?.concerts}
 
           <div
-            class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-white p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
+            class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-background p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
           >
             <div class="flex items-center justify-between">
               <Title size="3xl" family="unica">{details?.name}</Title>

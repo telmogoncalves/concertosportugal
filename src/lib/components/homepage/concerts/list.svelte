@@ -17,7 +17,7 @@
   </div>
 
   <Marquee {direction} pauseOnHover {speed}>
-    <div class="flex space-x-4">
+    <div class="flex space-x-4 pr-4">
       {#each concerts as concert}
         {@const cover = concert.artists[0].image}
 

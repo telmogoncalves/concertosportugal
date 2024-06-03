@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
   import '../app.css'
 
+  import { Hamburger } from 'svelte-hamburgers'
+
+  import { navigating } from '$app/stores';
   import Logo from '$lib/components/logo.svelte'
   import { Button } from '$lib/components/ui/button'
 
@@ -10,9 +13,15 @@
     { name: 'Artistas', href: '/artists' },
     { name: 'Locais', href: '/venues' },
   ]
+
+  let open = false
+
+  $: if ($navigating) {
+    open = false
+  }
 </script>
 
-<div class="sticky top-0 z-50 flex items-center justify-between border-b bg-background px-6 py-4 md:px-12">
+<div class="sticky top-0 z-50 flex items-center justify-between border-b bg-background px-6 md:px-12 h-20">
   <div class="flex items-center space-x-2">
     <a data-sveltekit-preload-data="hover" href="/" class="flex items-center space-x-3 text-sm">
       <Logo class="h-10 md:h-12" />
@@ -30,6 +39,24 @@
       </Button>
     </div>
   </nav>
+
+  <div class="block md:hidden items-center justify-center pt-1.5">
+    <Hamburger type="spring" --color="white" --layer-width="25px" --padding="0px" --layer-height="2.5px" bind:open />
+  </div>
+
+  {#if open}
+    <div class="fixed md:hidden h-[calc(100%-5rem)] w-full top-20 left-0 bg-background z-50">
+      <div class="flex flex-col items-center space-y-6 pt-6">
+        {#each menus as { name, href }}
+          <a {href} class="text-lg font-unica hover:underline" data-sveltekit-preload-data="hover">{name}</a>
+        {/each}
+
+        <Button href="mailto:telmo@hey.com?subject=Adicionar%20Concerto" class="font-unica text-base font-medium">
+          Adiciona o TeU concerto
+        </Button>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <slot />

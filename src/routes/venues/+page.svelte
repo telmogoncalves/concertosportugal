@@ -5,11 +5,11 @@
   export let data: import('./$types').PageData
 </script>
 
-<div class="p-12 space-y-6">
+<div class="p-6 md:p-12 space-y-6">
   <Title size="4xl" weight="bold" family="unica">Locais</Title>
 
   {#await data.streamed.venues}
-    <div class="grid grid-cols-4 gap-6">
+    <div class="md:grid grid-cols-4 gap-6">
       {#each Array(6) as _}
         {#key _}
           <Skeleton class="h-72 w-full" />
@@ -17,7 +17,7 @@
       {/each}
     </div>
   {:then venues}
-    <div class="grid grid-cols-4 gap-6">
+    <div class="md:grid grid-cols-4 gap-6 md:space-y-0 space-y-6">
       {#each venues as venue}
         <a
           data-sveltekit-preload-data="hover"

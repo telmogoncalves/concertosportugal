@@ -25,7 +25,9 @@
         <a {href} class="text-lg font-unica hover:underline" data-sveltekit-preload-data="hover">{name}</a>
       {/each}
 
-      <Button class="font-unica text-base font-medium">Adiciona o TeU</Button>
+      <Button href="mailto:telmo@hey.com?subject=Adicionar%20Concerto" class="font-unica text-base font-medium">
+        Adiciona o TeU
+      </Button>
     </div>
   </nav>
 </div>

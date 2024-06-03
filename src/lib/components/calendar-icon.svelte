@@ -3,11 +3,12 @@
   import { pt } from 'date-fns/locale'
 
   export let date: Date | string
+  export let top: 'day' | 'month' = 'day'
 </script>
 
 <div class="ring-4 ring-primary w-12 rounded-md">
   <div class="h-5 bg-primary text-background text-xs text-center font-medium capitalize">
-    {format(new Date(date), 'E', { locale: pt })}
+    {format(new Date(date), top === 'day' ? 'E' : 'MMM', { locale: pt })}
   </div>
 
   <div class="text-lg font-semibold flex items-center justify-center py-0.5">

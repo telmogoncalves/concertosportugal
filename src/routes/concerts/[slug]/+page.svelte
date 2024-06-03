@@ -14,7 +14,7 @@
     <div
       class="flex flex-col items-center space-x-0 space-y-6 text-center md:flex-row md:space-x-6 md:space-y-0 md:text-left"
     >
-      <CalendarIcon date={data.concert.date} />
+      <CalendarIcon date={data.concert.date} top="month" />
       <Title size="3xl" weight="bold" family="grotesque">{data.concert.name}</Title>
     </div>
 

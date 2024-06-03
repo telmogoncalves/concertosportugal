@@ -17,7 +17,7 @@
 
         <div class="flex items-center space-x-4">
           <!-- Bands -->
-          <div class="flex -space-x-2 overflow-hidden">
+          <div class="-space-x-2 overflow-hidden md:flex hidden">
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
@@ -40,7 +40,7 @@
 
         <div class="flex items-center space-x-4">
           <!-- Bands -->
-          <div class="flex -space-x-2 overflow-hidden">
+          <div class="md:flex hidden -space-x-2 overflow-hidden">
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
           </div>
@@ -66,7 +66,7 @@
 
         <div class="flex items-center space-x-4">
           <!-- Bands -->
-          <div class="flex -space-x-2 overflow-hidden">
+          <div class="md:flex hidden -space-x-2 overflow-hidden">
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
@@ -86,7 +86,7 @@
 
         <div class="flex items-center space-x-4">
           <!-- Bands -->
-          <div class="flex -space-x-2 overflow-hidden">
+          <div class="md:flex hidden -space-x-2 overflow-hidden">
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />
             <Skeleton class="h-8 w-8 rounded-full ring-4 ring-background" />

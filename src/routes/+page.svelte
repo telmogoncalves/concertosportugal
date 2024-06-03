@@ -45,10 +45,11 @@
       }, [])}
 
       <div class="space-y-24">
-        {#each grouped as { month, concerts }}
+        {#each grouped as { month, concerts }, i}
           {@const speeds = [30, 40, 50]}
+          {@const directions = ['left', 'right']}
           {#if concerts.length}
-            <List title={month} {concerts} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
+            <List title={month} {concerts} direction={directions[i]} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
           {/if}
         {/each}
       </div>

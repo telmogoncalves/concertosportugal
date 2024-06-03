@@ -8,6 +8,7 @@
   export let title: string
   export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
   export let speed = 80
+  export let direction: 'left' | 'right' | undefined = 'left'
 </script>
 
 <div class="space-y-6">
@@ -15,7 +16,7 @@
     <Title size="3xl" weight="bold" family="unica">{title}</Title>
   </div>
 
-  <Marquee direction="left" pauseOnHover {speed}>
+  <Marquee {direction} pauseOnHover {speed}>
     <div class="flex space-x-4">
       {#each concerts as concert}
         {@const cover = concert.artists[0].image}

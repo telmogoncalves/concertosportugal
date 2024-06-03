@@ -56,7 +56,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
-        grotesque: ['Bricolage Grotesque', ...fontFamily.sans],
+        unica: ['Unica One', ...fontFamily.sans],
       },
     },
   },

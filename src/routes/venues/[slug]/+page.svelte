@@ -17,12 +17,12 @@
       {/if}
 
       <div class="space-y-1">
-        <Title size="3xl" weight="bold" family="grotesque">{data.venue.name}</Title>
+        <Title size="3xl" weight="bold" family="unica">{data.venue.name}</Title>
       </div>
 
       <div class="rounded-xl border p-4 shadow-sm">
         <div class="space-y-2">
-          <Title size="lg" weight="semibold" family="grotesque">📍 Localização</Title>
+          <Title size="xl" weight="semibold" family="unica">📍 Localização</Title>
 
           <div class="space-y-1 text-gray-500">
             <div>{data.venue.address}</div>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-span-9 space-y-4">
-      <Title size="2xl" weight="semibold" family="grotesque">Concertos</Title>
+      <Title size="2xl" weight="semibold" family="unica">Concertos</Title>
 
       <ConcertsList data={data.venue.concerts} />
     </div>

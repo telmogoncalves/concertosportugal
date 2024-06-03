@@ -1,21 +1,21 @@
 <script lang="ts">
-import type { Artist, Concert, Venue } from '@prisma/client'
-import Marquee from 'svelte-fast-marquee'
+  import type { Artist, Concert, Venue } from '@prisma/client'
+  import Marquee from 'svelte-fast-marquee'
 
-import CalendarIcon from '$lib/components/calendar-icon.svelte'
-import Title from '$lib/components/title.svelte'
+  import CalendarIcon from '$lib/components/calendar-icon.svelte'
+  import Title from '$lib/components/title.svelte'
 
-export let title: string
-export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
-export let speed = 80
+  export let title: string
+  export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
+  export let speed = 80
 </script>
 
 <div class="space-y-6">
   <div class="px-12 capitalize">
-    <Title size="xl" weight="bold" family="grotesque">{title}</Title>
+    <Title size="3xl" weight="bold" family="unica">{title}</Title>
   </div>
 
-  <Marquee direction="left" pauseOnHover speed={speed}>
+  <Marquee direction="left" pauseOnHover {speed}>
     <div class="flex space-x-4">
       {#each concerts as concert}
         {@const cover = concert.artists[0].image}
@@ -33,7 +33,7 @@ export let speed = 80
             </div>
 
             <div class="truncate">
-              <div class="truncate text-ellipsis font-semibold">{concert.name}</div>
+              <div class="truncate text-ellipsis font-unica font-semibold">{concert.name}</div>
               <div class="text-sm text-gray-500">📍 {concert.venue.name}</div>
             </div>
           </div>

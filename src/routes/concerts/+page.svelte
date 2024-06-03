@@ -7,7 +7,7 @@
 </script>
 
 <div class="mx-auto space-y-6 p-6 md:w-2/3 md:p-12">
-  <Title size="3xl" weight="bold" family="grotesque">Concertos</Title>
+  <Title size="3xl" weight="bold" family="unica">Concertos</Title>
 
   {#await data.streamed.concerts}
     <ConcertsSkeleton />

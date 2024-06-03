@@ -14,6 +14,7 @@
         black: 'font-black',
       },
       size: {
+        '5xl': 'text-5xl',
         '4xl': 'text-4xl',
         '3xl': 'text-3xl',
         '2xl': 'text-2xl',
@@ -25,8 +26,8 @@
       },
       family: {
         sans: 'font-sans',
-        grotesque: 'font-grotesque',
         mono: 'font-mono',
+        unica: 'font-unica',
       },
     },
   })

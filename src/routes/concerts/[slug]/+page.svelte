@@ -15,12 +15,12 @@
       class="flex flex-col items-center space-x-0 space-y-6 text-center md:flex-row md:space-x-6 md:space-y-0 md:text-left"
     >
       <CalendarIcon date={data.concert.date} top="month" />
-      <Title size="3xl" weight="bold" family="grotesque">{data.concert.name}</Title>
+      <Title size="4xl" weight="bold" family="unica">{data.concert.name}</Title>
     </div>
 
     <div class="grid-cols-2 gap-8 space-y-6 md:grid md:space-y-0">
       <div class="space-y-4 rounded-xl border p-3 md:p-8">
-        <Title size="lg" weight="semibold" family="grotesque">🎸 Bandas</Title>
+        <Title size="xl" weight="semibold" family="unica">🎸 Bandas</Title>
 
         <div class="grid-cols-2 gap-4 md:grid">
           {#each data.concert.artists as artist}
@@ -30,19 +30,19 @@
               class="flex items-center space-x-3 rounded-lg p-2 hover:bg-secondary"
             >
               <img src={artist.image} alt={artist.name} class="h-12 w-12 rounded-full object-cover" />
-              <Title size="lg" weight="semibold" family="grotesque">{artist.name}</Title>
+              <Title size="lg" weight="semibold" family="sans">{artist.name}</Title>
             </a>
           {/each}
         </div>
       </div>
 
       <div class="space-y-4 rounded-xl border p-3 md:p-8">
-        <Title size="lg" weight="semibold" family="grotesque">📍 Localização</Title>
+        <Title size="xl" weight="semibold" family="unica">📍 Localização</Title>
 
         <img src={data.concert.venue.image} alt={data.concert.venue.name} class="h-72 w-full rounded-lg object-cover" />
 
         <div class="space-y-2">
-          <Title size="base" weight="medium" family="grotesque">{data.concert.venue.name}</Title>
+          <Title size="lg" weight="semibold" family="sans">{data.concert.venue.name}</Title>
 
           <div class="space-y-1">
             <div class="text-gray-500">{data.concert.venue.address}</div>

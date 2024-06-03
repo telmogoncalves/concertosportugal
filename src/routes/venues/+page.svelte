@@ -6,7 +6,7 @@
 </script>
 
 <div class="p-12 space-y-6">
-  <Title size="3xl" weight="bold" family="grotesque">Locais</Title>
+  <Title size="4xl" weight="bold" family="unica">Locais</Title>
 
   {#await data.streamed.venues}
     <div class="grid grid-cols-4 gap-6">
@@ -27,7 +27,7 @@
           <img src={venue.image} alt={venue.name} class="object-cover h-72 rounded-lg" />
 
           <div class="px-4 py-3">
-            <Title size="xl" family="grotesque">{venue.name}</Title>
+            <Title size="2xl" family="unica">{venue.name}</Title>
           </div>
         </a>
       {/each}

@@ -77,12 +77,12 @@
 {#if concerts.length}
   {#each concerts as concert}
     <div class="space-y-3">
-      <Title size="2xl" weight="semibold" family="grotesque">{concert.year}</Title>
+      <Title size="2xl" weight="semibold" family="unica">{concert.year}</Title>
 
       <div class="space-y-6">
         {#each concert.months as month}
           <div class="space-y-3 rounded-xl border p-6 shadow-sm">
-            <Title size="xl" weight="semibold">
+            <Title size="2xl" weight="semibold" family="unica">
               <span class="capitalize">
                 {format(new Date(2024, Number(month.value) - 1, 1), 'MMMM', { locale: pt })}
               </span>
@@ -114,16 +114,12 @@
                       >
                         <div class="hidden md:block">
                           {#if concert.artists}
-                            <div class="flex -space-x-2 overflow-hidden">
+                            <div class="flex -space-x-3 overflow-hidden">
                               {#each concert.artists as artist}
                                 <Tooltip.Root openDelay={0.3}>
                                   <Tooltip.Trigger>
-                                    <div class="w-8">
-                                      <img
-                                        src={artist.image}
-                                        alt={artist.name}
-                                        class="h-8 w-8 rounded-full object-cover ring-4 ring-background"
-                                      />
+                                    <div class="h-10 w-10 rounded-full border-background overflow-hidden border-4">
+                                      <img src={artist.image} alt={artist.name} class="w-full h-full object-cover" />
                                     </div>
                                   </Tooltip.Trigger>
 

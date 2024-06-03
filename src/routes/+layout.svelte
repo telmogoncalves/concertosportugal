@@ -18,10 +18,10 @@
     </a>
   </div>
 
-  <nav class="hidden text-sm font-medium md:block">
+  <nav class="hidden font-medium md:block">
     <div class="flex space-x-6">
       {#each menus as { name, href }}
-        <a {href} class="hover:underline" data-sveltekit-preload-data="hover">{name}</a>
+        <a {href} class="text-lg font-unica hover:underline" data-sveltekit-preload-data="hover">{name}</a>
       {/each}
     </div>
   </nav>

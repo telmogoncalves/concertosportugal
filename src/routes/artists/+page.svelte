@@ -11,7 +11,7 @@
 </script>
 
 <div class="space-y-6 p-6 md:p-12">
-  <Title size="3xl" weight="bold" family="grotesque">Artistas</Title>
+  <Title size="3xl" weight="bold" family="unica">Artistas</Title>
 
   {#await data.streamed.artists}
     <div class="flex space-x-6">
@@ -47,7 +47,7 @@
               <img src={artist.image} alt={artist.name} class="h-full w-20 object-cover" />
 
               <div class="p-4">
-                <Title size="lg" family="grotesque">{artist.name}</Title>
+                <Title size="xl" family="unica">{artist.name}</Title>
               </div>
             </a>
           {/each}
@@ -61,7 +61,7 @@
             class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-white p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
           >
             <div class="flex items-center justify-between">
-              <Title size="xl" family="grotesque">{details?.name}</Title>
+              <Title size="3xl" family="unica">{details?.name}</Title>
               <Button href="/artists" variant="outline" size="sm" data-sveltekit-noscroll>Fechar</Button>
             </div>
 

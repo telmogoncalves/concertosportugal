@@ -14,13 +14,13 @@
   <div class="mx-auto w-2/3">
     <div class="space-y-6 text-center">
       <div class="space-y-2">
-        <Title size="4xl" weight="bold" family="grotesque">Concertos em Portugal</Title>
+        <Title size="5xl" weight="bold" family="unica">Concertos em Portugal</Title>
         <div class="text-xl text-gray-500">Descobre os próximos concertos.</div>
       </div>
 
-      <Button href="/concerts" variant="outline" size="lg" data-sveltekit-preload-data="hover"
-        >Ver todos os concertos</Button
-      >
+      <Button href="/concerts" variant="outline" size="lg" data-sveltekit-preload-data="hover">
+        Ver todos os concertos
+      </Button>
     </div>
   </div>
 

@@ -2,8 +2,6 @@
   import { copy, copyToClipboard } from '@svelte-put/copy'
   import { format } from 'date-fns'
   import { pt } from 'date-fns/locale'
-  import { domToJpeg } from 'modern-screenshot'
-  import { onMount } from 'svelte'
 
   import Title from '$lib/components/title.svelte'
   import { Button } from '$lib/components/ui/button'
@@ -11,14 +9,13 @@
   $: downloadUrl = ''
   let trigger: HTMLButtonElement
 
-  onMount(async () => {
-    const element = document.querySelector('#instagram') as HTMLElement
-    const url = await domToJpeg(element, { width: 540, height: 540 })
-
-    downloadUrl = url
-  })
-
   export let data: import('./$types').PageData
+
+  // Get a random artist image to use as background
+  $: selectedArtist = data.concert?.artists[0]
+  $: selectedPosition = 'center'
+
+  let positions = ['left', 'center', 'right']
 </script>
 
 <div class="flex items-center p-24 justify-center gap-12">
@@ -30,82 +27,128 @@
           style="
             width: 540px;
             height: 540px;
-            background-image: url(/crowd-bg.png);
-            background-size: 200% auto;
+            background-image: url({selectedArtist?.image});
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: bottom;
+            background-position: {selectedPosition};
           "
-          class="bg-black"
+          class="bg-black flex flex-col justify-end p-3"
         >
-          <div class="p-12 space-y-8">
-            <div class="ring-4 ring-primary w-20 rounded-md font-unica">
-              <div class="bg-primary text-background text-2xl uppercase text-center font-semibold pb-0.5">
-                {format(new Date(data.concert.date), 'MMM', { locale: pt })}
-              </div>
+          <img src={selectedArtist?.image} alt={selectedArtist?.name} class="w-12 h-12" />
 
-              <div class="text-4xl font-semibold flex items-center justify-center py-2.5">
-                {format(new Date(data.concert.date), 'd')}
+          <div class="bg-black p-4 rounded-2xl flex items-center space-x-6">
+            <div>
+              <div class="ring-4 ring-primary w-20 rounded-md font-unica">
+                <div class="bg-primary text-background text-2xl uppercase text-center font-semibold pb-0.5">
+                  {format(new Date(data.concert.date), 'MMM', { locale: pt })}
+                </div>
+
+                <div class="text-4xl font-semibold flex items-center justify-center py-2.5">
+                  {format(new Date(data.concert.date), 'd')}
+                </div>
               </div>
             </div>
 
-            <Title size="4xl" weight="bold" family="unica">{data.concert.name}</Title>
+            <div>
+              <Title size="2xl" weight="bold" family="unica">{data.concert.name}</Title>
 
-            <div class="flex flex-wrap gap-8">
-              {#each data.concert.artists.slice(0, 6) as artist}
-                <div class="flex whitespace-nowrap items-center space-x-3 rounded-xl">
-                  <img src={artist.image} alt={artist.name} class="h-14 w-14 rounded-full object-cover" />
-                  <div>
-                    <Title size="xl" weight="semibold">{artist.name}</Title>
-                  </div>
-                </div>
-              {/each}
+              <div class="text-lg">
+                {#if data.concert.artists.length > 4}
+                  {data.concert.artists
+                    .slice(0, 4)
+                    .map(artist => artist.name)
+                    .join(', ')} e mais{' '}
+                  {data.concert.artists.length - 4} bandas
+                {:else}
+                  {new Intl.ListFormat('pt').format(data.concert.artists.map(artist => artist.name))}
+                {/if}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="flex justify-end">
+      <div class="flex justify-end space-x-4">
+        <button bind:this={trigger}>
+          <Button variant="secondary">Copiar post</Button>
+        </button>
+
         {#if downloadUrl}
-          <Button href={downloadUrl} download={data.concert.name}>Download and post on Instagram</Button>
+          <Button href={downloadUrl} download={data.concert.name}>Descarregar imagem</Button>
         {/if}
       </div>
     </div>
 
-    <div class="space-y-6">
-      <div
-        use:copy={{ trigger }}
-        on:copied={e => {
-          copyToClipboard(e.detail.text)
-          alert('Post copiado!')
-        }}
-      >
-        {data.concert.name} é já no próximo dia {format(new Date(data.concert.date), 'd')} de {format(
-          new Date(data.concert.date),
-          'MMMM',
-          { locale: pt },
-        )}!
+    <div class="space-y-16">
+      <div class="space-y-6">
+        <Title size="xl" weight="bold" family="unica">Imagem de fundo</Title>
 
-        <br />
-        <br />
+        <div class="grid grid-cols-2 gap-2">
+          {#each data.concert.artists as artist}
+            <button
+              on:click={async () => {
+                selectedArtist = artist
+              }}
+              class="flex items-center space-x-4 w-full p-2 hover:bg-secondary rounded-xl"
+              class:bg-white={selectedArtist === artist}
+              class:text-black={selectedArtist === artist}
+            >
+              <img src={artist.image} alt={artist.name} class="w-12 h-12 object-cover rounded-full" />
 
-        <div>🎸 Bandas:</div>
-        {#each data.concert.artists as artist}
-          - {artist.name}
-          <br />
-        {/each}
-
-        <br />
-        <br />
-
-        <div>📍 Local:</div>
-        <div>
-          {data.concert.venue.name}
+              <div>
+                <Title weight="medium">{artist.name}</Title>
+              </div>
+            </button>
+          {/each}
         </div>
       </div>
 
-      <button bind:this={trigger}>
-        <Button>Copiar post</Button>
-      </button>
+      <div class="space-y-6">
+        <Title size="xl" weight="bold" family="unica">Posição</Title>
+
+        {#each positions as position}
+          <button
+            on:click={() => (selectedPosition = position)}
+            class="flex items-center space-x-4 w-full p-4 hover:bg-secondary rounded-xl capitalize"
+            class:bg-white={selectedPosition === position}
+            class:text-black={selectedPosition === position}
+          >
+            {position}
+          </button>
+        {/each}
+      </div>
+    </div>
+
+    <div
+      use:copy={{ trigger }}
+      on:copied={e => {
+        copyToClipboard(e.detail.text)
+        alert('Post copiado!')
+      }}
+      class="hidden"
+    >
+      {data.concert.name} é já no próximo dia {format(new Date(data.concert.date), 'd')} de {format(
+        new Date(data.concert.date),
+        'MMMM',
+        { locale: pt },
+      )}!
+
+      <br />
+      <br />
+
+      <div>🎸 Bandas:</div>
+      {#each data.concert.artists as artist}
+        - {artist.name}
+        <br />
+      {/each}
+
+      <br />
+      <br />
+
+      <div>📍 Local:</div>
+      <div>
+        {data.concert.venue.name}
+      </div>
     </div>
   {/if}
 </div>

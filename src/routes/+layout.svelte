@@ -1,9 +1,13 @@
 <script lang="ts">
   import '../app.css'
+  import '@fontsource/unica-one'
+  import '@fontsource-variable/bricolage-grotesque'
 
+  import unica from '@fontsource/unica-one/files/unica-one-latin-400-normal.woff2?url'
+  import bricolage from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-cyrillic-ext-opsz-normal.woff2?url'
   import { Hamburger } from 'svelte-hamburgers'
 
-  import { navigating } from '$app/stores';
+  import { navigating } from '$app/stores'
   import Logo from '$lib/components/logo.svelte'
   import { Button } from '$lib/components/ui/button'
 
@@ -20,6 +24,11 @@
     open = false
   }
 </script>
+
+<svelte:head>
+  <link rel="preload" href={unica} as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href={bricolage} as="font" type="font/woff2" crossorigin="anonymous" />
+</svelte:head>
 
 <div class="sticky top-0 z-50 flex items-center justify-between border-b bg-background px-6 md:px-12 h-20">
   <div class="flex items-center space-x-2">

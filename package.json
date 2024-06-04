@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.28.1",
+    "@svelte-put/copy": "^3.0.2",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -46,6 +47,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.0.6",
+    "@fontsource/unica-one": "^5.0.20",
     "@internationalized/date": "^3.5.4",
     "@prisma/client": "^5.14.0",
     "@tabler/icons-svelte": "^3.5.0",
@@ -56,6 +59,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "lucide-svelte": "^0.381.0",
+    "modern-screenshot": "^4.4.39",
     "openai": "^4.47.2",
     "slugify": "^1.6.6",
     "svelte-carousel": "^1.0.25",

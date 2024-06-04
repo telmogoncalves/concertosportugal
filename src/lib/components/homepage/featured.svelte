@@ -18,7 +18,7 @@
 >
   <div class="flex flex-col items-center px-0 md:px-6 py-12 space-y-6">
     <a href="/concerts/{concert.slug}" class="hover:underline">
-      <Title size="4xl" weight="bold">{concert.name}</Title>
+      <Title size="4xl" weight="bold" family="unica">{concert.name}</Title>
     </a>
 
     <div class="flex items-center space-x-5">

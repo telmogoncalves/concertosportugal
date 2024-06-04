@@ -50,10 +50,8 @@
 
       <div class="space-y-24">
         {#each grouped as { month, concerts }, i}
-          {@const directions = ['next', 'prev']}
-
-          {#if concerts.length > 6}
-            <List title={month} {concerts} direction={directions[i]} />
+          {#if concerts.length}
+            <List title={month} {concerts} />
           {/if}
         {/each}
       </div>

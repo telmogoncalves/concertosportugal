@@ -1,14 +1,11 @@
 <script lang="ts">
   import type { Artist, Concert, Venue } from '@prisma/client'
-  import Carousel from 'svelte-carousel'
-  import Device from 'svelte-device-info'
 
   import CalendarIcon from '$lib/components/calendar-icon.svelte'
   import Title from '$lib/components/title.svelte'
 
   export let title: string
   export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
-  export let direction: 'next' | 'prev' | undefined = 'next'
 </script>
 
 <div class="space-y-6">
@@ -16,25 +13,16 @@
     <Title size="3xl" weight="bold" family="unica">{title}</Title>
   </div>
 
-  <Carousel
-    autoplayDirection={direction}
-    autoplayDuration={0}
-    duration={3000}
-    particlesToShow={Device.isPhone ? 1 : 4}
-    dots={false}
-    arrows={false}
-    autoplay
-    pauseOnFocus
-  >
+  <div class="md:grid grid-cols-4 gap-6 mx-12 space-y-5">
     {#each concerts as concert}
       {@const cover = concert.artists[0].image}
 
       <a
         data-sveltekit-preload-data="hover"
         href="/concerts/{concert.slug}"
-        class="block w-[250px] mx-2 overflow-hidden rounded-xl border shadow-sm hover:border-primary md:w-[350px]"
+        class="block overflow-hidden rounded-xl border shadow-sm hover:border-primary"
       >
-        <img src={cover} alt={concert.artists[0].name} class="h-24 w-full object-cover md:h-48" />
+        <img src={cover} alt={concert.artists[0].name} class="w-full object-cover md:h-48" />
 
         <div class="flex items-center space-x-4 p-4">
           <div>
@@ -48,5 +36,5 @@
         </div>
       </a>
     {/each}
-  </Carousel>
+  </div>
 </div>

@@ -7,7 +7,6 @@
 
   export let title: string
   export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
-  export let speed = 80
   export let direction: 'next' | 'prev' | undefined = 'next'
 </script>
 

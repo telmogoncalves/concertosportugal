@@ -31,7 +31,7 @@
               class="flex items-center space-x-3 rounded-lg p-2 hover:bg-secondary"
             >
               <img src={artist.image} alt={artist.name} class="h-12 w-12 rounded-full object-cover" />
-              <Title size="xl" weight="semibold" family="unica">{artist.name}</Title>
+              <Title size="lg" weight="semibold">{artist.name}</Title>
             </a>
           {/each}
         </div>

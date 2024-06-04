@@ -52,7 +52,9 @@ self.addEventListener('fetch', event => {
       const response = await fetch(event.request)
 
       if (response.status === 200) {
-        cache.put(event.request, response.clone())
+        try {
+          cache.put(event.request, response.clone())
+        } catch {}
       }
 
       return response

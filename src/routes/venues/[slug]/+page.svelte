@@ -35,7 +35,11 @@
     <div class="col-span-9 space-y-4">
       <Title size="2xl" weight="semibold" family="unica">Concertos</Title>
 
-      <ConcertsList data={data.venue.concerts} />
+      {#if data.venue.concerts.length}
+        <ConcertsList data={data.venue.concerts} />
+      {:else}
+        <div>Não há concertos agendados</div>
+      {/if}
     </div>
   </div>
 {:else}

@@ -30,7 +30,7 @@
           </div>
 
           <div class="truncate">
-            <div class="truncate text-ellipsis font-unica font-semibold">{concert.name}</div>
+            <div class="truncate text-ellipsis font-semibold">{concert.name}</div>
             <div class="text-sm text-gray-500">📍 {concert.venue.name}</div>
           </div>
         </div>

@@ -1,8 +1,11 @@
 <script lang="ts">
   import Title from '$lib/components/title.svelte'
+  import { Input } from '$lib/components/ui/input'
   import { Skeleton } from '$lib/components/ui/skeleton'
 
   export let data: import('./$types').PageData
+
+  let q = ''
 </script>
 
 <div class="p-6 md:p-12 space-y-6">
@@ -17,8 +20,10 @@
       {/each}
     </div>
   {:then venues}
+    <Input placeholder="Procurar locais" bind:value={q} />
+
     <div class="md:grid grid-cols-4 gap-6 md:space-y-0 space-y-6">
-      {#each venues as venue}
+      {#each venues.filter(venue => venue.name.toLowerCase().includes(q.toLowerCase())) as venue}
         <a
           data-sveltekit-preload-data="hover"
           href="/venues/{venue.slug}"
@@ -27,7 +32,7 @@
           <img src={venue.image} alt={venue.name} class="object-cover h-72 rounded-lg" />
 
           <div class="px-4 py-3">
-            <Title size="2xl" family="unica">{venue.name}</Title>
+            <Title size="xl" weight="semibold">{venue.name}</Title>
           </div>
         </a>
       {/each}

@@ -3,9 +3,11 @@
   import ConcertsList from '$lib/components/concerts-list.svelte'
   import Title from '$lib/components/title.svelte'
   import Button from '$lib/components/ui/button/button.svelte'
+  import { Input } from '$lib/components/ui/input'
   import { Skeleton } from '$lib/components/ui/skeleton'
 
   export let data: import('./$types').PageData
+  let q = ''
 
   $: selected = $page.url.searchParams.get('see')
 </script>
@@ -29,7 +31,7 @@
     </div>
   {:then artists}
     <div class="space-y-6">
-      <!-- <Input placeholder="Procurar artistas" bind:value={q} /> -->
+      <Input placeholder="Procurar artistas" bind:value={q} />
 
       <div class="flex w-full items-start space-x-6">
         <div
@@ -37,7 +39,7 @@
           class:grid-cols-4={!selected}
           class:grid-cols-2={selected}
         >
-          {#each artists as artist}
+          {#each artists.filter(artist => artist.name.toLowerCase().includes(q.toLowerCase())) as artist}
             <a
               class="flex h-20 items-center overflow-hidden rounded-xl border hover:border-primary"
               href="/artists?see={artist.slug}"
@@ -47,7 +49,7 @@
               <img src={artist.image} alt={artist.name} class="h-full w-20 object-cover" />
 
               <div class="p-4">
-                <Title size="xl" family="unica">{artist.name}</Title>
+                <Title size="lg">{artist.name}</Title>
               </div>
             </a>
           {/each}

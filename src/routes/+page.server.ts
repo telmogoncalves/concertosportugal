@@ -24,6 +24,10 @@ export const load: PageServerLoad = async () => {
     ? await db.concert.findMany({
         where: {
           name: featured.name,
+          date: {
+            gte: new Date(featured.date),
+            lte: new Date(new Date(featured.date).setMonth(new Date(featured.date).getMonth() + 1)),
+          },
           NOT: {
             slug: featured.slug,
           },

@@ -10,7 +10,7 @@
 <div
   class="border rounded-xl"
   style="
-    background-image: url(/crowd.png);
+    background-image: url(/crowd-bg.png);
     background-size: 120% auto;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -18,7 +18,7 @@
 >
   <div class="flex flex-col items-center px-0 md:px-6 py-12 space-y-6">
     <a href="/concerts/{concert.slug}" class="hover:underline">
-      <Title size="4xl" weight="bold" family="unica">{concert.name}</Title>
+      <Title size="4xl" weight="bold">{concert.name}</Title>
     </a>
 
     <div class="flex items-center space-x-5">
@@ -41,7 +41,7 @@
           >
             <img src={artist.image} alt={artist.name} class="h-12 w-12 rounded-full object-cover" />
             <div>
-              <Title size="lg" weight="semibold" family="unica">{artist.name}</Title>
+              <Title weight="semibold">{artist.name}</Title>
             </div>
           </a>
         {/each}

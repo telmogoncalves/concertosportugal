@@ -52,7 +52,7 @@
         {#each grouped as { month, concerts }, i}
           {@const directions = ['next', 'prev']}
 
-          {#if concerts.length}
+          {#if concerts.length > 6}
             <List title={month} {concerts} direction={directions[i]} />
           {/if}
         {/each}

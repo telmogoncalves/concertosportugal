@@ -56,7 +56,9 @@
 
   {#if data.days.length}
     <div class="md:p-12 p-6 space-y-6">
-      <Title size="2xl" weight="bold" family="unica">Outros dias do festival</Title>
+      <Title size="2xl" weight="bold" family="unica">
+        + {data.concert.name}
+      </Title>
       <ConcertsList data={data.days} />
     </div>
   {/if}

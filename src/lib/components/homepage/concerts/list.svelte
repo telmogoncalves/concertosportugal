@@ -13,7 +13,7 @@
     <Title size="3xl" weight="bold" family="unica">{title}</Title>
   </div>
 
-  <div class="md:grid grid-cols-4 gap-6 mx-12">
+  <div class="md:grid grid-cols-4 gap-6 mx-12 space-y-5 md:space-y-0">
     {#each concerts as concert}
       {@const cover = concert.artists[0].image}
 

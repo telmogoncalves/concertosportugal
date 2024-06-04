@@ -41,6 +41,7 @@ model Concert {
   slug String    @unique
   date DateTime  @db.Date
   time DateTime? @db.Time
+  featured Boolean? @default(false)
 
   venue   Venue  @relation(fields: [venueId], references: [id])
   venueId String

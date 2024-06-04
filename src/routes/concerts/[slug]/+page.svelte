@@ -1,5 +1,6 @@
 <script lang="ts">
   import CalendarIcon from '$lib/components/calendar-icon.svelte'
+  import ConcertsList from '$lib/components/concerts-list.svelte'
   import Title from '$lib/components/title.svelte'
 
   export let data: import('./$types').PageData
@@ -30,7 +31,7 @@
               class="flex items-center space-x-3 rounded-lg p-2 hover:bg-secondary"
             >
               <img src={artist.image} alt={artist.name} class="h-12 w-12 rounded-full object-cover" />
-              <Title size="lg" weight="semibold" family="sans">{artist.name}</Title>
+              <Title size="xl" weight="semibold" family="unica">{artist.name}</Title>
             </a>
           {/each}
         </div>
@@ -52,6 +53,13 @@
       </div>
     </div>
   </div>
+
+  {#if data.days.length}
+    <div class="md:p-12 p-6 space-y-6">
+      <Title size="2xl" weight="bold" family="unica">Outros dias do festival</Title>
+      <ConcertsList data={data.days} />
+    </div>
+  {/if}
 {:else}
   <div>Concerto não encontrado</div>
 {/if}

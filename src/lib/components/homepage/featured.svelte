@@ -16,7 +16,7 @@
     background-position: bottom;
   "
 >
-  <div class="flex flex-col items-center px-6 py-12 space-y-6">
+  <div class="flex flex-col items-center px-0 md:px-6 py-12 space-y-6">
     <a href="/concerts/{concert.slug}" class="hover:underline">
       <Title size="4xl" weight="bold" family="unica">{concert.name}</Title>
     </a>
@@ -32,7 +32,7 @@
     <div class="space-y-4">
       <div class="text-center font-unica text-xl">Com</div>
 
-      <div class="md:grid grid-cols-3 md:gap-3 space-y-2 md:space-y-0">
+      <div class="flex flex-wrap justify-center md:gap-3 gap-0 space-y-2 md:space-y-0">
         {#each concert.artists as artist}
           <a
             href="/artists?see={artist.slug}"

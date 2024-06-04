@@ -5,10 +5,13 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async () => {
   const featured = await db.concert.findFirst({
     where: {
+      featured: true,
       date: {
         gte: new Date(),
       },
-      featured: true,
+    },
+    orderBy: {
+      date: 'asc',
     },
     include: {
       venue: true,

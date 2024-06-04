@@ -4,6 +4,7 @@
 
   import List from '$lib/components/homepage/concerts/list.svelte'
   import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
+  import Featured from '$lib/components/homepage/featured.svelte'
   import Title from '$lib/components/title.svelte'
   import { Button } from '$lib/components/ui/button'
 
@@ -11,12 +12,16 @@
 </script>
 
 <div class="space-y-12 py-24">
-  <div class="mx-auto w-2/3">
+  <div class="mx-auto md:w-2/3 px-6 md:px-0">
     <div class="space-y-6 text-center">
       <div class="space-y-2">
         <Title size="5xl" weight="bold" family="unica">Concertos em Portugal</Title>
         <div class="text-xl text-gray-500">Descobre os próximos concertos.</div>
       </div>
+
+      {#if data.featured}
+        <Featured concert={data.featured} />
+      {/if}
 
       <Button href="/concerts" variant="outline" size="lg" data-sveltekit-preload-data="hover">
         Ver todos os concertos
@@ -49,7 +54,12 @@
           {@const speeds = [30, 40, 50]}
           {@const directions = ['left', 'right']}
           {#if concerts.length}
-            <List title={month} {concerts} direction={directions[i]} speed={speeds[Math.floor(Math.random() * speeds.length)]} />
+            <List
+              title={month}
+              {concerts}
+              direction={directions[i]}
+              speed={speeds[Math.floor(Math.random() * speeds.length)]}
+            />
           {/if}
         {/each}
       </div>

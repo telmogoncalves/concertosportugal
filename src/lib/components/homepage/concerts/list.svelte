@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Artist, Concert, Venue } from '@prisma/client'
   import Carousel from 'svelte-carousel'
+  import Device from 'svelte-device-info'
 
   import CalendarIcon from '$lib/components/calendar-icon.svelte'
   import Title from '$lib/components/title.svelte'
@@ -18,8 +19,8 @@
   <Carousel
     autoplayDirection={direction}
     autoplayDuration={0}
-    duration={8000}
-    particlesToShow={4}
+    duration={3000}
+    particlesToShow={Device.isPhone ? 1 : 4}
     dots={false}
     arrows={false}
     autoplay

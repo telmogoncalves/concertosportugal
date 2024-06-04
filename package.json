@@ -58,6 +58,7 @@
     "lucide-svelte": "^0.381.0",
     "openai": "^4.47.2",
     "slugify": "^1.6.6",
+    "svelte-carousel": "^1.0.25",
     "svelte-fast-marquee": "^0.7.0",
     "svelte-pincode": "^2.2.1",
     "tailwind-merge": "^2.3.0",

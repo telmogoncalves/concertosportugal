@@ -37,7 +37,6 @@
         const date = new Date(concert.date)
         const month = format(date, 'MMMM', { locale: pt })
 
-        // @ts-expect-error - TS doesn't know about the Date constructor
         const monthIndex = acc.findIndex(m => m.month === month)
 
         if (monthIndex === -1) {
@@ -51,15 +50,10 @@
 
       <div class="space-y-24">
         {#each grouped as { month, concerts }, i}
-          {@const speeds = [30, 40, 50]}
-          {@const directions = ['left', 'right']}
+          {@const directions = ['next', 'prev']}
+
           {#if concerts.length}
-            <List
-              title={month}
-              {concerts}
-              direction={directions[i]}
-              speed={speeds[Math.floor(Math.random() * speeds.length)]}
-            />
+            <List title={month} {concerts} direction={directions[i]} />
           {/if}
         {/each}
       </div>

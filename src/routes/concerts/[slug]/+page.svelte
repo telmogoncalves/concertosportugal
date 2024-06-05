@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { IconBrandInstagram } from '@tabler/icons-svelte'
+
   import CalendarIcon from '$lib/components/calendar-icon.svelte'
   import ConcertsList from '$lib/components/concerts-list.svelte'
   import Title from '$lib/components/title.svelte'
@@ -12,11 +14,19 @@
 
 {#if data.concert}
   <div class="space-y-12 p-6 md:p-12">
-    <div
-      class="flex flex-col items-center space-x-0 space-y-6 text-center md:flex-row md:space-x-6 md:space-y-0 md:text-left"
-    >
-      <CalendarIcon date={data.concert.date} top="month" />
-      <Title size="4xl" weight="bold" family="unica">{data.concert.name}</Title>
+    <div class="flex items-center justify-between">
+      <div
+        class="flex flex-col items-center space-x-0 space-y-6 text-center md:flex-row md:space-x-6 md:space-y-0 md:text-left"
+      >
+        <CalendarIcon date={data.concert.date} top="month" />
+        <Title size="4xl" weight="bold" family="unica">{data.concert.name}</Title>
+      </div>
+
+      {#if data.admin}
+        <a href="/concerts/{data.concert.slug}/gram">
+          <IconBrandInstagram class="h-12" />
+        </a>
+      {/if}
     </div>
 
     <div class="grid-cols-2 gap-8 space-y-6 md:grid md:space-y-0">

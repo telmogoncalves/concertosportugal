@@ -3,6 +3,7 @@
   import { pt } from 'date-fns/locale'
 
   import Title from '$lib/components/title.svelte'
+  import Button from '$lib/components/ui/button/button.svelte'
   import { Textarea } from '$lib/components/ui/textarea'
 
   export let data: import('./$types').PageData
@@ -10,6 +11,22 @@
   // Get a random artist image to use as background
   $: selectedArtist = data.concert?.artists[0]
   $: selectedPosition = 'center'
+
+  let postContent: string | undefined = undefined
+  $: if (data.concert && !postContent) {
+    let tomorrow = isTomorrow(new Date(data.concert.date))
+    let week = format(new Date(data.concert.date), 'EEEE', { locale: pt })
+    let day = format(new Date(data.concert.date), 'd', { locale: pt })
+    let month = format(new Date(data.concert.date), 'MMMM', { locale: pt })
+
+    postContent = `${data.concert.name} ∙ ${tomorrow ? 'amanhã' : week}, ${day} de ${month}!
+
+🎸
+${data.concert.artists.map(artist => `- ${artist.name}`).join('\n')}
+
+📍 ${data.concert.venue.name}
+`
+  }
 
   let positions = ['left', 'center', 'right']
 </script>
@@ -106,21 +123,9 @@
 </div>
 
 {#if data.concert}
-  {@const tomorrow = isTomorrow(new Date(data.concert.date))}
-  {@const day = format(new Date(data.concert.date), 'd')}
-  {@const month = format(new Date(data.concert.date), 'MMMM', { locale: pt })}
+  <div class="w-1/3 mx-auto space-y-6">
+    <Textarea class="h-72" bind:value={postContent} />
 
-  <div class="w-1/3 mx-auto">
-    <Textarea
-      class="h-72"
-      value={`${data.concert.name} é já ${tomorrow ? 'amanhã!' : `no dia ${day} de ${month}`}!
-
-🎸 Bandas:
-${data.concert.artists.map(artist => `- ${artist.name}`).join('\n')}
-
-📍 Local:
-${data.concert.venue.name}
-`}
-    />
+    <Button class="w-full">Gerar conteúdo</Button>
   </div>
 {/if}

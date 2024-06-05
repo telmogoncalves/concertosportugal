@@ -30,8 +30,6 @@
           "
           class="bg-black flex flex-col justify-end p-3"
         >
-          <img src={selectedArtist?.image} alt={selectedArtist?.name} class="w-12 h-12" />
-
           <div class="bg-black p-4 rounded-2xl flex items-center space-x-6">
             <div>
               <div class="ring-4 ring-primary w-20 rounded-md font-unica">

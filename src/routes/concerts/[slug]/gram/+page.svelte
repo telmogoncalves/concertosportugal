@@ -1,13 +1,9 @@
 <script lang="ts">
-  import { copy, copyToClipboard } from '@svelte-put/copy'
-  import { format } from 'date-fns'
+  import { format, isTomorrow } from 'date-fns'
   import { pt } from 'date-fns/locale'
 
   import Title from '$lib/components/title.svelte'
-  import { Button } from '$lib/components/ui/button'
-
-  $: downloadUrl = ''
-  let trigger: HTMLButtonElement
+  import { Textarea } from '$lib/components/ui/textarea'
 
   export let data: import('./$types').PageData
 
@@ -67,16 +63,6 @@
           </div>
         </div>
       </div>
-
-      <div class="flex justify-end space-x-4">
-        <button bind:this={trigger}>
-          <Button variant="secondary">Copiar post</Button>
-        </button>
-
-        {#if downloadUrl}
-          <Button href={downloadUrl} download={data.concert.name}>Descarregar imagem</Button>
-        {/if}
-      </div>
     </div>
 
     <div class="space-y-16">
@@ -118,37 +104,25 @@
         {/each}
       </div>
     </div>
-
-    <div
-      use:copy={{ trigger }}
-      on:copied={e => {
-        copyToClipboard(e.detail.text)
-        alert('Post copiado!')
-      }}
-      class="hidden"
-    >
-      {data.concert.name} é já no próximo dia {format(new Date(data.concert.date), 'd')} de {format(
-        new Date(data.concert.date),
-        'MMMM',
-        { locale: pt },
-      )}!
-
-      <br />
-      <br />
-
-      <div>🎸 Bandas:</div>
-      {#each data.concert.artists as artist}
-        - {artist.name}
-        <br />
-      {/each}
-
-      <br />
-      <br />
-
-      <div>📍 Local:</div>
-      <div>
-        {data.concert.venue.name}
-      </div>
-    </div>
   {/if}
 </div>
+
+{#if data.concert}
+  {@const tomorrow = isTomorrow(new Date(data.concert.date))}
+  {@const day = format(new Date(data.concert.date), 'd')}
+  {@const month = format(new Date(data.concert.date), 'MMMM', { locale: pt })}
+
+  <div class="w-1/3 mx-auto">
+    <Textarea
+      class="h-72"
+      value={`${data.concert.name} é já ${tomorrow ? 'amanhã!' : `no dia ${day} de ${month}`}!
+
+🎸 Bandas:
+${data.concert.artists.map(artist => `- ${artist.name}`).join('\n')}
+
+📍 Local:
+${data.concert.venue.name}
+`}
+    />
+  </div>
+{/if}

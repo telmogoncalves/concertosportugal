@@ -31,7 +31,7 @@
 
     <div class="grid-cols-2 gap-8 space-y-6 md:grid md:space-y-0">
       <div class="space-y-4 rounded-xl border p-3 md:p-8">
-        <Title size="xl" weight="semibold" family="unica">🎸 Bandas</Title>
+        <Title size="xl" weight="semibold" family="unica">🎸 Artistas</Title>
 
         <div class="grid-cols-2 gap-4 md:grid">
           {#each data.concert.artists as artist}
@@ -53,7 +53,9 @@
         <img src={data.concert.venue.image} alt={data.concert.venue.name} class="h-72 w-full rounded-lg object-cover" />
 
         <div class="space-y-2">
-          <Title size="lg" weight="semibold" family="sans">{data.concert.venue.name}</Title>
+          <a href="/venues/{data.concert.venue.slug}" data-sveltekit-preload-data="hover" class="hover:underline">
+            <Title size="lg" weight="semibold" family="sans">{data.concert.venue.name}</Title>
+          </a>
 
           <div class="space-y-1">
             <div class="text-gray-500">{data.concert.venue.address}</div>

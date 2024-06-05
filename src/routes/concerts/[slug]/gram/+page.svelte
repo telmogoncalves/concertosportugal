@@ -69,7 +69,7 @@ ${data.concert.artists.map(artist => `- ${artist.name}`).join('\n')}
                     .slice(0, 4)
                     .map(artist => artist.name)
                     .join(', ')} e mais{' '}
-                  {data.concert.artists.length - 4} bandas
+                  {data.concert.artists.length - 4} artistas
                 {:else}
                   {new Intl.ListFormat('pt').format(data.concert.artists.map(artist => artist.name))}
                 {/if}

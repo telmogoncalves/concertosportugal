@@ -45,7 +45,7 @@ ${data.concert.artists.map(artist => `- ${artist.name}`).join('\n')}
             background-repeat: no-repeat;
             background-position: {selectedPosition};
           "
-          class="bg-black flex flex-col justify-end p-3"
+          class="bg-black flex flex-col justify-end p-8"
         >
           <div class="bg-black p-4 rounded-2xl flex items-center space-x-6">
             <div>
@@ -68,7 +68,7 @@ ${data.concert.artists.map(artist => `- ${artist.name}`).join('\n')}
                   {data.concert.artists
                     .slice(0, 4)
                     .map(artist => artist.name)
-                    .join(', ')} e mais{' '}
+                    .join(', ')} +
                   {data.concert.artists.length - 4} artistas
                 {:else}
                   {new Intl.ListFormat('pt').format(data.concert.artists.map(artist => artist.name))}

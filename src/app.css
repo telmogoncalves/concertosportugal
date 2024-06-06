@@ -87,3 +87,23 @@ input[type='number'] {
 [data-pincode] input {
   @apply !rounded-lg !border !bg-background text-2xl font-medium ring-2 ring-border;
 }
+
+@font-face {
+  font-family: 'Dealerplate California';
+  src:
+    url('/fonts/DealerplateCalifornia-Regular.woff2') format('woff2'),
+    url('/fonts/DealerplateCalifornia-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kooltura';
+  src:
+    url('/fonts/Kooltura.woff2') format('woff2'),
+    url('/fonts/Kooltura.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

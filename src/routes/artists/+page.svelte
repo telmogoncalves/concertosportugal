@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { page } from '$app/stores'
-  import ConcertsList from '$lib/components/concerts-list.svelte'
-  import Title from '$lib/components/title.svelte'
-  import Button from '$lib/components/ui/button/button.svelte'
-  import { Input } from '$lib/components/ui/input'
-  import { Skeleton } from '$lib/components/ui/skeleton'
+import { page } from '$app/stores'
+import ConcertsList from '$lib/components/concerts-list.svelte'
+import Title from '$lib/components/title.svelte'
+import Button from '$lib/components/ui/button/button.svelte'
+import { Input } from '$lib/components/ui/input'
+import { Skeleton } from '$lib/components/ui/skeleton'
 
-  export let data: import('./$types').PageData
-  let q = ''
+export let data: import('./$types').PageData
+let q = ''
 
-  $: selected = $page.url.searchParams.get('see')
+$: selected = $page.url.searchParams.get('see')
 </script>
 
 <div class="space-y-6 p-6 md:p-12">
-  <Title size="3xl" weight="bold" family="unica">Artistas</Title>
+  <Title size="2xl" transform="up" weight="bold" family="dela">Artistas</Title>
 
   {#await data.streamed.artists}
     <div class="flex space-x-6">
@@ -63,7 +63,7 @@
             class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-background p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
           >
             <div class="flex items-center justify-between">
-              <Title size="3xl" family="unica">{details?.name}</Title>
+              <Title size="2xl" family="dela">{details?.name}</Title>
               <Button href="/artists" variant="outline" size="sm" data-sveltekit-noscroll>Fechar</Button>
             </div>
 

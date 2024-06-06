@@ -1,8 +1,8 @@
 <script lang="ts">
-  import ConcertsList from '$lib/components/concerts-list.svelte'
-  import Title from '$lib/components/title.svelte'
+import ConcertsList from '$lib/components/concerts-list.svelte'
+import Title from '$lib/components/title.svelte'
 
-  export let data: import('./$types').PageData
+export let data: import('./$types').PageData
 </script>
 
 <svelte:head>
@@ -17,12 +17,12 @@
       {/if}
 
       <div class="space-y-1">
-        <Title size="3xl" weight="bold" family="unica">{data.venue.name}</Title>
+        <Title size="3xl" family="dela">{data.venue.name}</Title>
       </div>
 
       <div class="rounded-xl border p-4 shadow-sm">
         <div class="space-y-2">
-          <Title size="xl" weight="semibold" family="unica">📍 Localização</Title>
+          <Title size="xl" weight="bold">📍 Localização</Title>
 
           <div class="space-y-1 text-gray-500">
             <div>{data.venue.address}</div>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-span-9 space-y-4">
-      <Title size="2xl" weight="semibold" family="unica">Concertos</Title>
+      <Title size="2xl" transform="up" family="dela">Concertos</Title>
 
       {#if data.venue.concerts.length}
         <ConcertsList data={data.venue.concerts} />

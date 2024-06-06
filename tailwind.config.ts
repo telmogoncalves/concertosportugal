@@ -3,7 +3,7 @@ import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config: Config = {
   darkMode: ['class'],
-  content: ['./src/**/**/*.{html,js,svelte,ts}'],
+  content: ['./src/**/**/**/*.{html,js,svelte,ts}'],
   safelist: ['dark'],
   theme: {
     container: {
@@ -55,8 +55,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['Bricolage Grotesque Variable', ...fontFamily.sans],
-        unica: ['Unica One', ...fontFamily.sans],
+        sans: ['Inter Tight', ...fontFamily.sans],
+        dela: ['Dela Gothic One', ...fontFamily.sans],
       },
     },
   },

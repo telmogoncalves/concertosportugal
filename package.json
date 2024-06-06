@@ -48,8 +48,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@fontsource-variable/bricolage-grotesque": "^5.0.6",
-    "@fontsource/unica-one": "^5.0.20",
     "@internationalized/date": "^3.5.4",
     "@prisma/client": "^5.14.0",
     "@tabler/icons-svelte": "^3.5.0",

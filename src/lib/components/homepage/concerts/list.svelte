@@ -1,19 +1,19 @@
 <script lang="ts">
-  import type { Artist, Concert, Venue } from '@prisma/client'
+import type { Artist, Concert, Venue } from '@prisma/client'
 
-  import CalendarIcon from '$lib/components/calendar-icon.svelte'
-  import Title from '$lib/components/title.svelte'
+import CalendarIcon from '$lib/components/calendar-icon.svelte'
+import Title from '$lib/components/title.svelte'
 
-  export let title: string
-  export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
+export let title: string
+export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
 </script>
 
 <div class="space-y-6">
   <div class="px-12 capitalize">
-    <Title size="3xl" weight="bold" family="unica">{title}</Title>
+    <Title size="xl" transform="up" weight="bold" family="dela">{title}</Title>
   </div>
 
-  <div class="md:grid grid-cols-4 gap-6 mx-12 space-y-5 md:space-y-0">
+  <div class="mx-12 grid-cols-4 gap-6 space-y-5 md:grid md:space-y-0">
     {#each concerts as concert}
       {@const cover = concert.artists[0].image}
 

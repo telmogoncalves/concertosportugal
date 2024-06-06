@@ -1,22 +1,22 @@
 <script lang="ts">
-  import { format } from 'date-fns'
-  import { pt } from 'date-fns/locale'
+import { format } from 'date-fns'
+import { pt } from 'date-fns/locale'
 
-  import List from '$lib/components/homepage/concerts/list.svelte'
-  import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
-  import Featured from '$lib/components/homepage/featured.svelte'
-  import Title from '$lib/components/title.svelte'
-  import { Button } from '$lib/components/ui/button'
+import List from '$lib/components/homepage/concerts/list.svelte'
+import Skeleton from '$lib/components/homepage/concerts/skeleton.svelte'
+import Featured from '$lib/components/homepage/featured.svelte'
+import Title from '$lib/components/title.svelte'
+import { Button } from '$lib/components/ui/button'
 
-  export let data: import('./$types').PageData
+export let data: import('./$types').PageData
 </script>
 
 <div class="space-y-12 py-24">
-  <div class="mx-auto md:w-2/3 px-6 md:px-0">
+  <div class="mx-auto px-6 md:w-2/3 md:px-0">
     <div class="space-y-6 text-center">
       <div class="space-y-2">
-        <Title size="5xl" weight="bold" family="unica">Concertos em Portugal</Title>
-        <div class="text-xl text-gray-500">Descobre os próximos concertos.</div>
+        <Title size="6xl" weight="bold" family="dela">CONCERTOS</Title>
+        <div class="text-xl text-gray-500">Descobre os próximos concertos a acontecer em Portugal</div>
       </div>
 
       {#if data.featured}
@@ -51,7 +51,7 @@
       <div class="space-y-24">
         {#each grouped as { month, concerts }, i}
           {#if concerts.length}
-            <List title={month} {concerts} />
+            <List title={month} concerts={concerts} />
           {/if}
         {/each}
       </div>

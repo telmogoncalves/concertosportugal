@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { IconBrandInstagram } from '@tabler/icons-svelte'
+import { IconBrandInstagram } from '@tabler/icons-svelte'
 
-  import CalendarIcon from '$lib/components/calendar-icon.svelte'
-  import ConcertsList from '$lib/components/concerts-list.svelte'
-  import Title from '$lib/components/title.svelte'
+import CalendarIcon from '$lib/components/calendar-icon.svelte'
+import ConcertsList from '$lib/components/concerts-list.svelte'
+import Title from '$lib/components/title.svelte'
 
-  export let data: import('./$types').PageData
+export let data: import('./$types').PageData
 </script>
 
 <svelte:head>
@@ -19,7 +19,7 @@
         class="flex flex-col items-center space-x-0 space-y-6 text-center md:flex-row md:space-x-6 md:space-y-0 md:text-left"
       >
         <CalendarIcon date={data.concert.date} top="month" />
-        <Title size="4xl" weight="bold" family="unica">{data.concert.name}</Title>
+        <Title size="3xl" transform="up" weight="bold" family="dela">{data.concert.name}</Title>
       </div>
 
       {#if data.admin}
@@ -31,7 +31,7 @@
 
     <div class="grid-cols-2 gap-8 space-y-6 md:grid md:space-y-0">
       <div class="space-y-4 rounded-xl border p-3 md:p-8">
-        <Title size="xl" weight="semibold" family="unica">🎸 Artistas</Title>
+        <Title size="xl" family="dela">🎸 Artistas</Title>
 
         <div class="grid-cols-2 gap-4 md:grid">
           {#each data.concert.artists as artist}
@@ -48,7 +48,7 @@
       </div>
 
       <div class="space-y-4 rounded-xl border p-3 md:p-8">
-        <Title size="xl" weight="semibold" family="unica">📍 Localização</Title>
+        <Title size="xl" family="dela">📍 Localização</Title>
 
         <img src={data.concert.venue.image} alt={data.concert.venue.name} class="h-72 w-full rounded-lg object-cover" />
 
@@ -67,8 +67,8 @@
   </div>
 
   {#if data.days.length}
-    <div class="md:p-12 p-6 space-y-6">
-      <Title size="2xl" weight="bold" family="unica">
+    <div class="space-y-6 p-6 md:p-12">
+      <Title size="xl" transform="up" family="dela">
         + {data.concert.name}
       </Title>
       <ConcertsList data={data.days} />

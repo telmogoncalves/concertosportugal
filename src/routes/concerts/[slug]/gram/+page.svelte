@@ -34,7 +34,7 @@ let positions = ['left', 'center', 'right']
 <div class="flex items-center justify-center gap-12 p-24">
   {#if data.concert}
     <div class="space-y-6">
-      <div class="inline-block rounded-xl p-2 ring-4 ring-white">
+      <div class="inline-block rounded-xl p-2 ring-4 ring-primary">
         <div
           id="instagram"
           style="
@@ -47,10 +47,10 @@ let positions = ['left', 'center', 'right']
           "
           class="flex flex-col justify-end bg-black p-8"
         >
-          <div class="flex items-center space-x-6 rounded-2xl bg-black p-4">
+          <div class="flex items-center space-x-6 rounded-2xl bg-background p-4">
             <div>
-              <div class="font-dela w-20 rounded-md text-background ring-4 ring-primary">
-                <div class="bg-primary pb-1 text-center text-lg uppercase">
+              <div class="w-20 rounded-md font-dela text-primary ring-4 ring-primary">
+                <div class="bg-primary pb-1 text-center text-lg uppercase text-background">
                   {format(new Date(data.concert.date), 'MMM', { locale: pt })}
                 </div>
 
@@ -60,7 +60,7 @@ let positions = ['left', 'center', 'right']
               </div>
             </div>
 
-            <div class="text-background">
+            <div class="text-primary">
               <Title size="xl" transform="up" family="dela">{data.concert.name}</Title>
 
               <div class="text-lg">

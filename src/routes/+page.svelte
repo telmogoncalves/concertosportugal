@@ -18,15 +18,17 @@ export let data: import('./$types').PageData
         <Title size="6xl" weight="bold" family="dela">CONCERTOS</Title>
         <div class="text-xl text-gray-500">Descobre os próximos concertos a acontecer em Portugal</div>
       </div>
-
-      {#if data.featured}
-        <Featured concert={data.featured} />
-      {/if}
-
-      <Button href="/concerts" variant="outline" size="lg" data-sveltekit-preload-data="hover">
-        Ver todos os concertos
-      </Button>
     </div>
+  </div>
+
+  {#if data.featured}
+    <Featured concert={data.featured} />
+  {/if}
+
+  <div class="flex justify-center">
+    <Button href="/concerts" variant="outline" size="lg" data-sveltekit-preload-data="hover">
+      Ver todos os concertos
+    </Button>
   </div>
 
   <div>

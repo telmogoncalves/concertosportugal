@@ -49,7 +49,7 @@ $: selected = $page.url.searchParams.get('see')
               <img src={artist.image} alt={artist.name} class="h-full w-20 object-cover" />
 
               <div class="p-4">
-                <Title size="lg">{artist.name}</Title>
+                <Title size="lg" weight="semibold">{artist.name}</Title>
               </div>
             </a>
           {/each}

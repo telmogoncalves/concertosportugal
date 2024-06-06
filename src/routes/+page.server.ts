@@ -8,6 +8,8 @@ export const load: PageServerLoad = async () => {
       date: {
         gte: new Date(),
       },
+      // slug: 'comendatio-music-fest-paco-da-comenda-2024-06-15',
+      // slug: 'o-munas-fuzz-cartaxo-2024-06-08',
     },
     orderBy: {
       date: 'asc',

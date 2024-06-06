@@ -47,6 +47,6 @@ export let family: $$Props['family'] = 'sans'
 export let transform: $$Props['transform'] = 'normal'
 </script>
 
-<div {...$$props} class={clsx('tracking-tight', title({ weight, family, transform, size, class: $$props.class }))}>
+<div {...$$props} class={clsx('', title({ weight, family, transform, size, class: $$props.class }))}>
   <slot />
 </div>

@@ -36,7 +36,7 @@ $: totalArtists = concert.artists.length
       </div>
 
       <div class="space-y-4">
-        <div class="font-dela text-center text-lg uppercase">Com</div>
+        <div class="text-center font-dela text-lg uppercase">Com</div>
 
         <div class="flex flex-wrap justify-center gap-0 space-y-2 md:gap-3 md:space-y-0">
           {#each concert.artists as artist}

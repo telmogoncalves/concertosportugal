@@ -12,13 +12,13 @@ let today = isToday(new Date(date))
 <div
   class={clsx('w-12 overflow-hidden rounded-md font-dela ring-4', {
   'ring-primary': !today,
-  'ring-green-500': today,
+  'ring-violet-500': today,
 })}
 >
   <div
     class={clsx('h-[20px] text-center text-xs uppercase', {
     'bg-primary text-background': !today,
-    'bg-green-500 text-background': today,
+    'bg-violet-500 text-background': today,
   })}
   >
     {format(new Date(date), top === 'day' ? 'E' : 'MMM', { locale: pt })}
@@ -27,7 +27,7 @@ let today = isToday(new Date(date))
   <div
     class={clsx('flex items-center justify-center bg-background py-0.5 text-xl', {
     'text-primary': !today,
-    'text-green-500': today,
+    'text-violet-500': today,
   })}
   >
     {format(new Date(date), 'd')}

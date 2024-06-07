@@ -116,9 +116,13 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
                               {#each concert.artists as artist}
                                 <Tooltip.Root openDelay={0.3}>
                                   <Tooltip.Trigger>
-                                    <div class="h-10 w-10 overflow-hidden rounded-full border-4 border-background">
+                                    <a
+                                      href="/artists?see={artist.slug}"
+                                      data-sveltekit-noscroll
+                                      class="block h-10 w-10 overflow-hidden rounded-full border-4 border-background"
+                                    >
                                       <img src={artist.image} alt={artist.name} class="h-full w-full object-cover" />
-                                    </div>
+                                    </a>
                                   </Tooltip.Trigger>
 
                                   <Tooltip.Content>

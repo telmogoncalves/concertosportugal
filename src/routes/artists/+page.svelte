@@ -1,4 +1,13 @@
 <script lang="ts">
+import {
+  IconArrowLeft,
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandSpotify,
+  IconBrandYoutube,
+  IconWorld,
+} from '@tabler/icons-svelte'
+
 import { page } from '$app/stores'
 import ConcertsList from '$lib/components/concerts-list.svelte'
 import Title from '$lib/components/title.svelte'
@@ -62,14 +71,48 @@ $: selected = $page.url.searchParams.get('see')
           <div
             class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-background p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
           >
-            <div class="flex items-center justify-end">
-              <Button href="/artists" variant="outline" size="sm" data-sveltekit-noscroll>Fechar</Button>
+            <div class="flex items-center">
+              <Button href="/artists" variant="outline" size="icon" data-sveltekit-noscroll>
+                <IconArrowLeft class="h-4 w-4" />
+              </Button>
             </div>
 
             <div class="grid-cols-2 gap-4 space-y-4 md:grid md:space-y-0">
               <img src={details?.image} alt={details?.name} class="h-72 w-full rounded-xl object-cover object-top" />
-              <div>
+              <div class="space-y-3">
                 <Title size="2xl" family="dela">{details?.name}</Title>
+
+                <div class="flex items-center space-x-3">
+                  {#if details?.instagram}
+                    <a href={details.instagram} target="_blank" rel="noopener noreferrer" class="hover:text-orange-500">
+                      <IconBrandInstagram class="h-7 w-7" />
+                    </a>
+                  {/if}
+
+                  {#if details?.spotify}
+                    <a href={details.spotify} target="_blank" rel="noopener noreferrer" class="hover:text-green-500">
+                      <IconBrandSpotify class="h-7 w-7" />
+                    </a>
+                  {/if}
+
+                  {#if details?.facebook}
+                    <a href={details.facebook} target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+                      <IconBrandFacebook class="h-7 w-7" />
+                    </a>
+                  {/if}
+
+                  {#if details?.youtube}
+                    <a href={details.youtube} target="_blank" rel="noopener noreferrer" class="hover:text-red-500">
+                      <IconBrandYoutube class="h-7 w-7" />
+                    </a>
+                  {/if}
+
+                  {#if details?.website}
+                    <a href={details.website} target="_blank" rel="noopener noreferrer" class="hover:text-gray-400">
+                      <IconWorld class="h-7 w-7" />
+                    </a>
+                  {/if}
+                </div>
               </div>
             </div>
 

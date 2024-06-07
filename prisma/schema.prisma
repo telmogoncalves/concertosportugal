@@ -22,17 +22,24 @@ model Venue {
   address     String
   city        String
   zip         String
-  capacity    Int
+  capacity    Int?
   concerts    Concert[]
 }
 
 model Artist {
-  id          String    @id @default(cuid())
+  id          String  @id @default(cuid())
   name        String
-  slug        String    @unique
+  slug        String  @unique
   description String?
   image       String
-  concerts    Concert[]
+
+  instagram String?
+  facebook  String?
+  spotify   String?
+  youtube   String?
+  website   String?
+
+  concerts Concert[]
 }
 
 model Concert {
@@ -41,23 +48,11 @@ model Concert {
   slug String    @unique
   date DateTime  @db.Date
   time DateTime? @db.Time
-  featured Boolean? @default(false)
 
   venue   Venue  @relation(fields: [venueId], references: [id])
   venueId String
 
-  artists      Artist[]
-  ticketHouses TicketHouse[]
+  artists Artist[]
 
   createdAt DateTime @default(now())
-}
-
-model TicketHouse {
-  id          String  @id @default(cuid())
-  name        String
-  slug        String  @unique
-  description String?
-  logo        String
-
-  concerts Concert[]
 }

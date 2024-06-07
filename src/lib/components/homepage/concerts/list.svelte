@@ -9,11 +9,11 @@ export let concerts: [Concert & { artists: Artist[]; venue: Venue }]
 </script>
 
 <div class="space-y-6">
-  <div class="px-12 capitalize">
+  <div class="px-6 capitalize md:px-12">
     <Title size="xl" transform="up" weight="bold" family="dela">{title}</Title>
   </div>
 
-  <div class="mx-12 grid-cols-4 gap-6 space-y-5 md:grid md:space-y-0">
+  <div class="mx-4 grid-cols-4 gap-6 space-y-5 md:mx-12 md:grid md:space-y-0">
     {#each concerts as concert}
       {@const cover = concert.artists[0].image}
 

@@ -62,14 +62,19 @@ $: selected = $page.url.searchParams.get('see')
           <div
             class="fixed -left-6 top-0 z-50 h-screen w-full space-y-4 overflow-scroll rounded-xl bg-background p-6 shadow-sm md:sticky md:top-24 md:w-2/3 md:border"
           >
-            <div class="flex items-center justify-between">
-              <Title size="2xl" family="dela">{details?.name}</Title>
+            <div class="flex items-center justify-end">
               <Button href="/artists" variant="outline" size="sm" data-sveltekit-noscroll>Fechar</Button>
             </div>
 
-            <img src={details?.image} alt={details?.name} class="h-72 w-full rounded-xl object-cover object-top" />
+            <div class="grid-cols-2 gap-4 space-y-4 md:grid md:space-y-0">
+              <img src={details?.image} alt={details?.name} class="h-72 w-full rounded-xl object-cover object-top" />
+              <div>
+                <Title size="2xl" family="dela">{details?.name}</Title>
+              </div>
+            </div>
 
             {#if concerts}
+              <hr />
               <ConcertsList data={concerts} />
             {/if}
           </div>

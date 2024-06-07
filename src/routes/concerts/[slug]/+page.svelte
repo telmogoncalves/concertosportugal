@@ -29,25 +29,28 @@ export let data: import('./$types').PageData
       {/if}
     </div>
 
-    <div class="grid-cols-2 gap-8 space-y-6 md:grid md:space-y-0">
-      <div class="space-y-4 rounded-xl border p-3 md:p-8">
+    <div class="grid-cols-5 gap-8 space-y-6 md:grid md:space-y-0">
+      <div class="col-span-3 space-y-4 rounded-xl border p-3 md:p-8">
         <Title size="xl" family="dela">🎸 Artistas</Title>
 
-        <div class="grid-cols-2 gap-4 md:grid">
+        <div class="grid-cols-3 gap-2 md:grid">
           {#each data.concert.artists as artist}
             <a
               href="/artists?see={artist.slug}"
               data-sveltekit-preload-data="hover"
-              class="flex items-center space-x-3 rounded-lg p-2 hover:bg-secondary"
+              class="group flex flex-col rounded-xl p-1"
             >
-              <img src={artist.image} alt={artist.name} class="h-12 w-12 rounded-full object-cover" />
-              <Title size="lg" weight="semibold">{artist.name}</Title>
+              <div class="truncate p-2 group-hover:underline">
+                <Title size="lg" weight="semibold">{artist.name}</Title>
+              </div>
+
+              <img src={artist.image} alt={artist.name} class="h-48 w-full rounded-lg object-cover" />
             </a>
           {/each}
         </div>
       </div>
 
-      <div class="space-y-4 rounded-xl border p-3 md:p-8">
+      <div class="col-span-2 space-y-4 rounded-xl border p-3 md:p-8">
         <Title size="xl" family="dela">📍 Localização</Title>
 
         <img src={data.concert.venue.image} alt={data.concert.venue.name} class="h-72 w-full rounded-lg object-cover" />

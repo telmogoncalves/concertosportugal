@@ -40,8 +40,8 @@ export let data: import('./$types').PageData
               data-sveltekit-preload-data="hover"
               class="group flex flex-col rounded-xl p-1"
             >
-              <div class="truncate p-2 group-hover:underline">
-                <Title size="lg" weight="semibold">{artist.name}</Title>
+              <div class="p-2 group-hover:underline">
+                <Title class="truncate text-ellipsis" size="lg" weight="semibold">{artist.name}</Title>
               </div>
 
               <img src={artist.image} alt={artist.name} class="h-48 w-full rounded-lg object-cover" />

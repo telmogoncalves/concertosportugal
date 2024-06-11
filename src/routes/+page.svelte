@@ -38,11 +38,12 @@ export let data: import('./$types').PageData
       {@const grouped = concerts.reduce((acc, concert) => {
         const date = new Date(concert.date)
         const month = format(date, 'MMMM', { locale: pt })
+        const year = date.getFullYear()
 
         const monthIndex = acc.findIndex(m => m.month === month)
 
         if (monthIndex === -1) {
-          acc.push({ month, concerts: [concert] })
+          acc.push({ month, year, concerts: [concert] })
         } else {
           acc[monthIndex].concerts.push(concert)
         }
@@ -50,10 +51,25 @@ export let data: import('./$types').PageData
         return acc
       }, [])}
 
+      <!-- <pre>
+        {JSON.stringify(grouped, null, 2)}
+        </pre> -->
+
       <div class="space-y-24">
-        {#each grouped as { month, concerts }, i}
+        {#each grouped as { month, year, concerts }, i}
+          {@const currentYear = new Date().getFullYear()}
+          {@const previousYear = i > 0 && grouped[i - 1].year}
+
           {#if concerts.length}
-            <List title={month} concerts={concerts} />
+            <div>
+              {#if year !== currentYear && year !== previousYear}
+                <div class="px-12 pb-4 tabular-nums text-gray-400">
+                  <Title size="sm" weight="medium">{year}</Title>
+                </div>
+              {/if}
+
+              <List title={month} concerts={concerts} />
+            </div>
           {/if}
         {/each}
       </div>

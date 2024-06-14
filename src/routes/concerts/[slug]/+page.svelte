@@ -30,7 +30,36 @@ export let data: import('./$types').PageData
     </div>
 
     <div class="grid-cols-5 gap-8 space-y-6 md:grid md:space-y-0">
-      <div class="col-span-3 space-y-4 rounded-xl border p-3 md:p-8">
+      <div class="col-span-3 overflow-hidden rounded-xl border">
+        <div class="grid-cols-3 md:grid">
+          <div class="border-r border-dashed p-8">
+            <Title size="xl" family="dela">🎸 Artistas</Title>
+          </div>
+
+          <div class="border-r border-dashed" />
+          <di />
+
+          {#each data.concert.artists as artist, i}
+            {@const border = (i + 1) % 3 === 0 ? '' : 'border-r'}
+
+            <div class="border-dashed {border} border-t">
+              <a
+                href="/artists?see={artist.slug}"
+                data-sveltekit-preload-data="hover"
+                class="flex flex-col p-6 hover:bg-gray-100"
+              >
+                <div class="p-2">
+                  <Title class="truncate text-ellipsis" size="lg" weight="semibold">{artist.name}</Title>
+                </div>
+
+                <img src={artist.image} alt={artist.name} class="h-48 w-full rounded-lg object-cover" />
+              </a>
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <!-- <div class="col-span-3 space-y-4 rounded-xl border p-3 md:p-8">
         <Title size="xl" family="dela">🎸 Artistas</Title>
 
         <div class="grid-cols-3 gap-2 md:grid">
@@ -48,7 +77,7 @@ export let data: import('./$types').PageData
             </a>
           {/each}
         </div>
-      </div>
+      </div> -->
 
       <div class="col-span-2 space-y-4 rounded-xl border p-3 md:p-8">
         <Title size="xl" family="dela">📍 Localização</Title>

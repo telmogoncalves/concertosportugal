@@ -112,7 +112,7 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
                       >
                         <div class="hidden md:block">
                           {#if concert.artists}
-                            {@const sliced = concert.artists.slice(0, 10)}
+                            {@const sliced = concert.artists.slice(0, 7)}
                             {@const remaining = concert.artists.length - sliced.length}
 
                             <div class="flex -space-x-3 overflow-hidden">

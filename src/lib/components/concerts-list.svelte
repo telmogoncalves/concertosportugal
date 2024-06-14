@@ -112,8 +112,11 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
                       >
                         <div class="hidden md:block">
                           {#if concert.artists}
+                            {@const sliced = concert.artists.slice(0, 10)}
+                            {@const remaining = concert.artists.length - sliced.length}
+
                             <div class="flex -space-x-3 overflow-hidden">
-                              {#each concert.artists as artist}
+                              {#each sliced as artist}
                                 <Tooltip.Root openDelay={0.3}>
                                   <Tooltip.Trigger>
                                     <a
@@ -130,6 +133,14 @@ $: concerts = data?.reduce((acc: Year[], concert: Concert) => {
                                   </Tooltip.Content>
                                 </Tooltip.Root>
                               {/each}
+
+                              {#if remaining > 0}
+                                <div
+                                  class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-4 border-background bg-black font-mono text-xs font-semibold text-white"
+                                >
+                                  +{remaining}
+                                </div>
+                              {/if}
                             </div>
                           {/if}
                         </div>

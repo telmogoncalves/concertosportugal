@@ -8,6 +8,7 @@ import Title from '$lib/components/title.svelte'
 export let concert: Concert & { venue: Venue; artists: Artist[]; dates: string[] }
 
 $: totalArtists = concert.artists.length
+$: artists = concert.artists.filter((artist, index, self) => self.findIndex(a => a.slug === artist.slug) === index)
 </script>
 
 <div
@@ -39,7 +40,7 @@ $: totalArtists = concert.artists.length
         <div class="text-center font-dela text-lg uppercase">Com</div>
 
         <div class="flex flex-wrap justify-center gap-0 space-y-2 md:gap-3 md:space-y-0">
-          {#each concert.artists as artist}
+          {#each artists as artist}
             <a
               href="/artists?see={artist.slug}"
               data-sveltekit-preload-data="hover"

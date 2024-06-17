@@ -37,7 +37,7 @@ export let data: import('./$types').PageData
           </div>
 
           <div class="border-r border-dashed" />
-          <di />
+          <div />
 
           {#each data.concert.artists as artist, i}
             {@const border = (i + 1) % 3 === 0 ? '' : 'border-r'}

@@ -1,3 +1,4 @@
+import { put } from '@vercel/blob'
 import { addMonths, format } from 'date-fns'
 import slugify from 'slugify'
 
@@ -87,25 +88,28 @@ export const load: PageServerLoad = async ({ request }) => {
   for (const concert of concerts) {
     // Generate unique slug based on the concert name, date, and venue
     const slug = slugify(`${concert.name} ${concert.venue.name} ${concert.date ?? ''}`, { lower: true })
-    const venueSlug = slugify(concert.venue.name, { lower: true })
+    const venue_slug = slugify(concert.venue.name, { lower: true })
 
     // Check if venue already exists in the database
-    const venue = await db.venue.findUnique({ where: { slug: venueSlug } })
+    const venue = await db.venue.findUnique({ where: { slug: venue_slug } })
 
     if (!venue) {
-      const prompt = `A real photo of the venue ${concert.venue.name} in ${concert.venue.city}, Portugal.`
+      const prompt = `A real photo of the venue ${concert.venue.name} in ${concert.venue.city}, Portugal. Here is a description of the venue: ${concert.venue.description}`
       console.log('✍🏻 Prompting OpenAI:', prompt)
 
       // Generate image for the venue if it doesn't exist
       const response = await openai.images.generate({ model: 'dall-e-3', prompt, n: 1, size: '1024x1024' })
       const image_url = response.data[0].url
 
+      const blob = await fetch(image_url!).then(res => res.blob())
+      const { url: venue_image_url } = await put(`${venue_slug}.jpg`, blob, { access: 'public' })
+
       await db.venue.create({
         data: {
-          slug: venueSlug,
+          slug: venue_slug,
           name: concert.venue.name,
           description: concert.venue.description,
-          image: image_url,
+          image: venue_image_url,
           address: concert.venue.address,
           city: concert.venue.city,
           zip: concert.venue.zip,
@@ -117,26 +121,29 @@ export const load: PageServerLoad = async ({ request }) => {
     // Check if artists already exist in the database
     await Promise.all(
       concert.artists.map(async artist => {
-        const artistSlug = slugify(artist.name, { lower: true })
+        const artist_slug = slugify(artist.name, { lower: true })
 
         // Check if artist already exists in the database
-        const artistExists = await db.artist.findUnique({ where: { slug: artistSlug } })
+        const artist_exists = await db.artist.findUnique({ where: { slug: artist_slug } })
 
-        if (artistExists) return
+        if (artist_exists) return
 
-        const prompt = `Generate an illustration of the singer / band / group ${artist.name} in a unique style.`
+        const prompt = `Generate an illustration of the singer / band / group ${artist.name} in a unique style. Here's a brief description of them: ${artist.description}`
         console.log('✍🏻 Prompting OpenAI:', prompt)
 
         // Generate image for the artist if it doesn't exist
         const response = await openai.images.generate({ model: 'dall-e-3', prompt, n: 1, size: '1024x1024' })
         const image_url = response.data[0].url
 
+        const blob = await fetch(image_url!).then(res => res.blob())
+        const { url: artist_image_url } = await put(`${artist_slug}.jpg`, blob, { access: 'public' })
+
         await db.artist.create({
           data: {
-            slug: artistSlug,
+            slug: artist_slug,
             name: artist.name,
             description: artist.description,
-            image: image_url ?? '',
+            image: artist_image_url,
             instagram: artist.instagram,
             facebook: artist.facebook,
             spotify: artist.spotify,
@@ -155,7 +162,7 @@ export const load: PageServerLoad = async ({ request }) => {
         name: concert.name,
         date: new Date(concert.date),
         venue: {
-          connect: { slug: venueSlug },
+          connect: { slug: venue_slug },
         },
         artists: {
           connect: concert.artists.map(artist => ({ slug: slugify(artist.name, { lower: true }) })),

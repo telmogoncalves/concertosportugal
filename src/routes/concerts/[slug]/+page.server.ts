@@ -1,9 +1,8 @@
-import { GRAM_SECRET } from '$env/static/private'
 import db from '$lib/db'
 
 import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = async ({ params, cookies }) => {
+export const load: PageServerLoad = async ({ params }) => {
   const concert = await db.concert.findUnique({
     where: {
       slug: params.slug,
@@ -40,6 +39,5 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
   return {
     concert,
     days,
-    admin: cookies.get('GRAM_SECRET') && cookies.get('GRAM_SECRET') === GRAM_SECRET,
   }
 }

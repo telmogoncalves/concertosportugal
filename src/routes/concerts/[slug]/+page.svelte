@@ -1,6 +1,4 @@
 <script lang="ts">
-import { IconBrandInstagram } from '@tabler/icons-svelte'
-
 import CalendarIcon from '$lib/components/calendar-icon.svelte'
 import ConcertsList from '$lib/components/concerts-list.svelte'
 import Title from '$lib/components/title.svelte'
@@ -21,12 +19,6 @@ export let data: import('./$types').PageData
         <CalendarIcon date={data.concert.date} top="month" />
         <Title size="3xl" transform="up" weight="bold" family="dela">{data.concert.name}</Title>
       </div>
-
-      {#if data.admin}
-        <a href="/concerts/{data.concert.slug}/gram">
-          <IconBrandInstagram class="h-12" />
-        </a>
-      {/if}
     </div>
 
     <div class="grid-cols-5 gap-8 space-y-6 md:grid md:space-y-0">

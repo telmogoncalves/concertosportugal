@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({ request }) => {
           You extract all concerts happening in Portugal from
           ${format(new Date(), 'yyyy-MM-dd')} to ${format(addMonths(new Date(), 6), 'yyyy-MM-dd')}
           into JSON data. You also need to include the venue and artists for each concert.
-          Make 100% sure the data is correct and complete, specially the dates and images for each artist and venue.`,
+          Make 100% sure the data is correct and complete, specially the images for each artist and venue.`,
       },
     ],
     response_format: {
@@ -46,6 +46,7 @@ export const load: PageServerLoad = async ({ request }) => {
                     properties: {
                       name: { type: 'string' },
                       description: { type: 'string' },
+                      image: { type: 'string' },
                       address: { type: 'string' },
                       city: { type: 'string' },
                       zip: { type: 'string' },
@@ -59,6 +60,7 @@ export const load: PageServerLoad = async ({ request }) => {
                       properties: {
                         name: { type: 'string' },
                         description: { type: 'string' },
+                        image: { type: 'string' },
                         instagram: { type: 'string' },
                         facebook: { type: 'string' },
                         spotify: { type: 'string' },
@@ -91,7 +93,7 @@ export const load: PageServerLoad = async ({ request }) => {
     const venue = await db.venue.findUnique({ where: { slug: venueSlug } })
 
     if (!venue) {
-      const prompt = `A real image of the venue ${concert.venue.name}`
+      const prompt = `A real photo of the venue ${concert.venue.name} in ${concert.venue.city}, Portugal.`
       console.log('✍🏻 Prompting OpenAI:', prompt)
 
       // Generate image for the venue if it doesn't exist
@@ -122,7 +124,7 @@ export const load: PageServerLoad = async ({ request }) => {
 
         if (artistExists) return
 
-        const prompt = `A real image of the artist ${artist.name}`
+        const prompt = `Generate an illustration of the singer / band / group ${artist.name} in a unique style.`
         console.log('✍🏻 Prompting OpenAI:', prompt)
 
         // Generate image for the artist if it doesn't exist

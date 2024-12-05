@@ -18,6 +18,7 @@ export let data: import('./$types').PageData
 
       <div class="space-y-1">
         <Title size="3xl" family="dela">{data.venue.name}</Title>
+        <p class="text-gray-500">{data.venue.description}</p>
       </div>
 
       <div class="rounded-xl border p-4 shadow-sm">

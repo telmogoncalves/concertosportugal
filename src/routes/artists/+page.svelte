@@ -113,6 +113,8 @@ $: selected = $page.url.searchParams.get('see')
                     </a>
                   {/if}
                 </div>
+
+                <p class="text-sm text-gray-500">{details?.description}</p>
               </div>
             </div>
 

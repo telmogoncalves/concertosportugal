@@ -148,14 +148,20 @@ export const load: PageServerLoad = async ({ request }) => {
     )
 
     // We can now create the concert in the database
-    await db.concert.create({
-      data: {
+    await db.concert.upsert({
+      where: { slug },
+      create: {
         slug,
         name: concert.name,
         date: new Date(concert.date),
         venue: {
           connect: { slug: venueSlug },
         },
+        artists: {
+          connect: concert.artists.map(artist => ({ slug: slugify(artist.name, { lower: true }) })),
+        },
+      },
+      update: {
         artists: {
           connect: concert.artists.map(artist => ({ slug: slugify(artist.name, { lower: true }) })),
         },
